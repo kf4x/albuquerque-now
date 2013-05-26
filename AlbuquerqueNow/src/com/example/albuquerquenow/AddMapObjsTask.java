@@ -14,9 +14,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.util.Log;
-
 import com.example.albuquerquenow.util.KmlParse;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -47,7 +45,6 @@ public class AddMapObjsTask extends AsyncTask<String, Void, List<Object>>{
     	//KmlParse p = new KmlParse();
     	List<Object> mapObjects = new ArrayList<Object>();
     	try {
-    		Log.d("=====", params[0] +"");
     		
 //    		if (((MapActivity)activity).useOfflineRoutes == true) {
 //    			//json = new KmlToJSON().KMLFromFile(activity.getAssets().open(params[0]));
@@ -104,7 +101,6 @@ public class AddMapObjsTask extends AsyncTask<String, Void, List<Object>>{
 					// TODO: handle exception
 				}
                
-                
                 String desc = v.getString("description");
 
                 JSONArray loc = v.getJSONArray("geometry");
@@ -144,8 +140,6 @@ public class AddMapObjsTask extends AsyncTask<String, Void, List<Object>>{
                     mapObjects.add(markOptions);
                    
 				}
-                
-
 
             }
         } catch (JSONException ex) {
@@ -168,7 +162,6 @@ public class AddMapObjsTask extends AsyncTask<String, Void, List<Object>>{
 				} else if (result.get(i) instanceof MarkerOptions && activity instanceof MapActivity) {
 					((MapActivity)activity).googlemap.addMarker((MarkerOptions) result.get(i));
 				}
-//				(PolylineOptions) result.get(i))
 			}
 
     	}

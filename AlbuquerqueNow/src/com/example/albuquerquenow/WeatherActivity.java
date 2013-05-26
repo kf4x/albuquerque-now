@@ -47,15 +47,14 @@ public class WeatherActivity extends ListActivity {
 		getActionBar().setDisplayShowTitleEnabled(false);
 		getActionBar().setIcon(R.drawable.home);
 
-		new FetchDataAsync(this).execute();
+		
 		
 		ListView lv = getListView();
 		LayoutInflater inflater = getLayoutInflater();
 		ViewGroup header = (ViewGroup)inflater.inflate(R.layout.header, lv, false);
 		lv.addHeaderView(header, null, false);
 		
-		liveCam = (ImageView)  findViewById(R.id.camera);
-		liveCam.setTag("http://wwc.instacam.com/instacamimg/KOBTV/KOBTV_s.jpg");
+
 //		liveCam.setOnClickListener(new View.OnClickListener() {
 //			
 //			@Override
@@ -65,10 +64,21 @@ public class WeatherActivity extends ListActivity {
 //			}
 //		});
 		
-		new DownloadImageTask().execute(liveCam);
-		
-
 		lv.setOnItemClickListener(itemClick());
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		liveCam = (ImageView)  findViewById(R.id.camera);
+		liveCam.setTag("http://wwc.instacam.com/instacamimg/KOBTV/KOBTV_s.jpg");
+		
+		new FetchDataAsync(this).execute();
+		
+		
+		new DownloadImageTask().execute(liveCam);
+
+		super.onResume();
 	}
 	
 	@Override

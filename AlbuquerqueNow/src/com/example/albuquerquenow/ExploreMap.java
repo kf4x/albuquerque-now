@@ -1,6 +1,6 @@
 package com.example.albuquerquenow;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,10 +15,10 @@ public class ExploreMap extends MapActivity {
 		kmz = extras.getString("kmz");
 
 		if (kmz != null && url != null) {
-			Log.d("=====","kmz");
+//			Log.d("=====","kmz");
 			new AddMapObjsTask(this).execute(url, kmz);
 		} else if (url != null) {
-			Log.d("=====","url");
+//			Log.d("=====","url");
 			new AddMapObjsTask(this).execute(url);
 		}
 		

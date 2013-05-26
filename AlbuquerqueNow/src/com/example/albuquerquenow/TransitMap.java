@@ -3,19 +3,11 @@ package com.example.albuquerquenow;
 
 import java.util.List;
 import android.app.ActionBar;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.webkit.WebView;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
-import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
-import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.model.Marker;
 
 
@@ -98,27 +90,6 @@ public class TransitMap extends MapActivity implements ActionBar.OnNavigationLis
 	}
 	
 
-    private boolean plotInformatoin(int i) {
-
-		String routeURL = "http://data.cabq.gov/transit/realtime/trace/";		
-		String routeFilename = "trace" + busNumber[i]+ ".kml";
-		
-		new AddTransMapObjTask(this).execute(routeURL, routeFilename, "");
-		//new AddLiveBus().execute("http://data.cabq.gov/community/art/publicart/PublicArt.kmz");
-		return false;
-	}
-    
-    private boolean plotBus(int i) {
-		if (i == 40) {
-			new AddTransMapObjTask(this,this).execute("http://data.cabq.gov/transit/UNM/shuttle.kml","","fullurl");
-		} else{
-	    	String busURL = "http://data.cabq.gov/transit/realtime/introute/";
-	    	String busFilename = "introute" + busNumber[i]+ ".kml";
-			new AddTransMapObjTask(this, this).execute(busURL, busFilename, "bus");
-    	}
-    	return false;
-	}
-    
     @Override
     protected void onPause() {
     	// TODO Auto-generated method stub
@@ -155,5 +126,26 @@ public class TransitMap extends MapActivity implements ActionBar.OnNavigationLis
 		for (int i = 0; i < markers.size(); i++) {
 			((Marker)markers.get(i)).remove();
 		}
+	}
+	
+    private boolean plotInformatoin(int i) {
+
+		String routeURL = "http://data.cabq.gov/transit/realtime/trace/";		
+		String routeFilename = "trace" + busNumber[i]+ ".kml";
+		
+		new AddTransMapObjTask(this).execute(routeURL, routeFilename, "");
+		//new AddLiveBus().execute("http://data.cabq.gov/community/art/publicart/PublicArt.kmz");
+		return false;
+	}
+    
+    private boolean plotBus(int i) {
+		if (i == 40) {
+			new AddTransMapObjTask(this,this).execute("http://data.cabq.gov/transit/UNM/shuttle.kml","","fullurl");
+		} else{
+	    	String busURL = "http://data.cabq.gov/transit/realtime/introute/";
+	    	String busFilename = "introute" + busNumber[i]+ ".kml";
+			new AddTransMapObjTask(this, this).execute(busURL, busFilename, "bus");
+    	}
+    	return false;
 	}
 }

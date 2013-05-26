@@ -11,11 +11,8 @@ import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -80,27 +77,18 @@ public class MapActivity extends Activity implements LocationListener {
 			googlemap = ((MapFragment)getFragmentManager().findFragmentById(R.id.map)).getMap();
 			
 			if( googlemap != null){
-				//add some code to init map
-				
+								
 				googlemap.setMyLocationEnabled(true);
 				
-				
-				LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
-				
-				String provider = lm.getBestProvider(new Criteria(), true);
-				
-				if (provider == null) {
-					onProviderDisabled(provider);	
-				}
-				
-				Location loc = lm.getLastKnownLocation(provider);
-				if (loc != null ) {
-					onLocationChanged(loc);
-				}	
+				//move camera to albuqueruque
+				googlemap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(35.08449090, -106.65113670)));
+				googlemap.animateCamera(CameraUpdateFactory.zoomTo(10));
 				
 				
 				googlemap.setOnMapLongClickListener(onLongClickMapSettins());
 				googlemap.setOnInfoWindowClickListener(infoClickListener());
+				
+				//info window
 				googlemap.setInfoWindowAdapter(new InfoWindowAdapter() {
 					
 					@Override
@@ -200,7 +188,7 @@ public class MapActivity extends Activity implements LocationListener {
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
         adb.setTitle("Map View");
 
-        adb.setPositiveButton("Turn sattellite View" + (isSatOn?" OFF":"\nON"), new DialogInterface.OnClickListener()
+        adb.setPositiveButton("Turn sattellite View" + (isSatOn?"\nOFF":"\nON"), new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int id)
 			{
@@ -214,7 +202,7 @@ public class MapActivity extends Activity implements LocationListener {
 				}
 			}
 		});
-        adb.setNegativeButton("Turn traffic view" + (googlemap.isTrafficEnabled()?" OFF":"\nON"), new DialogInterface.OnClickListener()
+        adb.setNegativeButton("Turn traffic view" + (googlemap.isTrafficEnabled()?"\nOFF":"\nON"), new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)
             {

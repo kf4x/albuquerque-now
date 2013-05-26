@@ -27,8 +27,14 @@ public class KmlParse {
     private ZipInputStream zis;
     private Pattern pattern = Pattern.compile("-?\\d+\\.\\d+");
 
-
-//return enum success
+	/**
+	 * 
+	 * @param url is path th kml file 
+	 * @return	JSON object will be returned.
+	 * @throws IOException
+	 * @throws NumberFormatException
+	 * @throws JSONException
+	 */
     public JSONObject KMLFromURL(URL url) throws IOException, NumberFormatException, JSONException {
         
         in = new Scanner(url.openStream());
@@ -36,21 +42,44 @@ public class KmlParse {
         in.close();
         return json;
     }
-    
+	/**
+	 * 
+	 * @param f is path to a local file 
+	 * @return JSON object will be returned
+	 * @throws FileNotFoundException
+	 * @throws NumberFormatException
+	 * @throws JSONException
+	 */
     public JSONObject KMLFromFile(File f) throws FileNotFoundException, NumberFormatException, JSONException{
         
         in = new Scanner(f);
         parse();
         return json;
     }
-    
+    /**
+     * 
+     * @param is USES InputStream useful in some situations when working with android.
+     * @return JSON object will be returned
+     * @throws FileNotFoundException
+     * @throws NumberFormatException
+     * @throws JSONException
+     */
     public JSONObject KMLFromFile(InputStream is) throws FileNotFoundException, NumberFormatException, JSONException{
         
         in = new Scanner(is);
         parse();
         return json;
     } 
-    
+    /**
+     * 
+     * @param f 
+     * @param outputFolder
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws NumberFormatException
+     * @throws JSONException
+     */
     public JSONObject KMZFromFile(File f, String outputFolder) throws FileNotFoundException, IOException, NumberFormatException, JSONException{
     	
     	zis = new ZipInputStream(new FileInputStream(f));
@@ -208,15 +237,10 @@ public class KmlParse {
                                      */
                                     
                                     coordinates = line;
-                                    //int comma = coordinates.indexOf(",");
-//                                    System.out.println(coordinates);
-//                                    System.out.println(coordinates.substring(0, comma));
+
                                     String[] latlngArray = coordinates.split(",");
-//                                    System.out.print(ht.length);
-//                                    System.out.println(ht[0]);
-//                                    System.out.println(ht[1]);
 
-
+                                    
                                     try {
                                     	latList.add(latlngArray[1]); //error
                                     	//if (coordinates.substring(comma+1).contains(",")) {
@@ -318,33 +342,14 @@ public class KmlParse {
 
     }
     
-//    private JSONArray createGeometry(){
-//        /*
-//         * Point            /
-//         * linestring
-//         * linear ring 
-//         * polygon
-//         * multigeomentry   /
-//         * model
-//         */
-//        
-//        return null;
-//    }
-    
-    private void seperate() {
-	// TODO Auto-generated method stub
-	
-}
 
 	protected File unzip(String outputFolder) throws FileNotFoundException, IOException{
+		
         byte[] buffer = new byte[1024];
-
-        //create output directory is not exists
-
-        //get the zip file content
-        //get the zipped file list entry
         ZipEntry ze = zis.getNextEntry();
         File newFile = null;
+        
+        
         while(ze!=null){
 
            String fileName = ze.getName();
@@ -354,15 +359,8 @@ public class KmlParse {
            }
            else{
                newFile = new File(outputFolder + File.separator + fileName);
-               //create all non exists folders
-               //else you will hit FileNotFoundException for compressed folder
                new File(newFile.getParent()).mkdirs();
            }
-
-           //System.out.println("file unzip : "+ newFile.getAbsoluteFile());
-
-
-            
 
             FileOutputStream fos = new FileOutputStream(newFile);             
 

@@ -30,7 +30,7 @@ public class RailTransitMap extends MapActivity{
 		getActionBar().setDisplayShowTitleEnabled(false);
 		getActionBar().setIcon(R.drawable.home);
 		
-		new AddMapObjsTask(this).execute("https://maps.google.com/maps/ms?ie=UTF8&t=m&source=embed&msa=0&output=kml&msid=201876092879256242075.0004c7b592eaf1c192359");
+		//new AddMapObjsTask(this).execute("https://maps.google.com/maps/ms?ie=UTF8&t=m&source=embed&msa=0&output=kml&msid=201876092879256242075.0004c7b592eaf1c192359");
 		//new AddMapObjsTask(this).execute("http://data.cabq.gov/community/bikepaths/BikePaths.kmz");
 
 //		new AddMapObjsTask(this).execute("http://coagisweb.cabq.gov/arcgis/rest/services/public/InteragencyTrails/MapServer/4/query?where=OBJECTID_1+%3E1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&f=kmz");
@@ -52,6 +52,13 @@ public class RailTransitMap extends MapActivity{
 		// TODO Auto-generated method stub
 		googlemap.clear();
 		super.onPause();
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		new AddMapObjsTask(this).execute("https://maps.google.com/maps/ms?ie=UTF8&t=m&source=embed&msa=0&output=kml&msid=201876092879256242075.0004c7b592eaf1c192359");
+		super.onResume();
 	}
 
 }
