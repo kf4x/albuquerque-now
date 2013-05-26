@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="10dp" 
+    android:gravity="center_horizontal|center_vertical"
+    >
+    
+	<LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/container_dropshadow"
+	    android:orientation="vertical"
+	    android:gravity="center_horizontal"
+	    
+	     >
+	    <TextView
+			android:background="@color/grey_"
+	        android:id="@+id/code"
+	        android:textSize="20sp"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"/>
+
+	</LinearLayout>
+	 <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Code"/>
+	 
+	 
+    <TextView
+        android:id="@+id/warn"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:paddingTop="10dp"
+        android:textColor="@color/rabq_red"
+        android:text="Warning reading is NOT reliable!"/> 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/category"
+        android:textSize="20sp"
+        android:paddingTop="10dp"
+        android:text="Category: "/>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pollut"
+        android:textSize="20sp"
+        android:paddingTop="10dp"
+        android:text="Responsible Pollutant: "/>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/pollut_level"
+        android:paddingTop="10dp"
+        android:text="Pollutant Level: "/>
+    <TextView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:paddingTop="10dp"
+        android:text="Cautionary Statements: "/>  
+</LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/ribbon_menu_home" android:title="Home" android:icon="@drawable/home"></item>
+    <item android:id="@+id/ribbon_menu_explore" android:title="Explore" android:icon="@drawable/move"></item>
+    <item android:id="@+id/ribbon_menu_transit" android:title="Bus Transit" android:icon="@drawable/bus"></item>
+    <item android:id="@+id/ribbon_menu_rrtransit" android:title="Rail Transit" android:icon="@drawable/traffic_lights_pyramid"></item>
+    <item android:id="@+id/ribbon_menu_search" android:title="Find a place" android:icon="@drawable/zoom"></item>
+    <item android:id="@+id/ribbon_menu_weather" android:title="Air Info" android:icon="@drawable/cloud"></item>
+</menu>

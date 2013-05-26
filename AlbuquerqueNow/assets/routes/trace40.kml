@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>ABQ Ride Route: 40</name>
+    <description>ABQ Ride Route: 40</description>
+    <Style id="RouteColor">
+      <LineStyle>
+        <color>FF000000</color>
+        <width>5</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>00000000</color>
+      </PolyStyle>
+    </Style>
+    <Placemark>
+      <name>Segment # 1</name>
+      <description></description>
+      <styleUrl>#RouteColor</styleUrl>
+      <LineString>
+        <extrude>1</extrude>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>
+          -106.6484,35.08262
+          -106.6482,35.08308
+          -106.6479,35.08303
+          -106.6478,35.08307
+          -106.6477,35.08316
+          -106.6476,35.08349
+          -106.6476,35.0837
+          -106.6476,35.08375
+          -106.6475,35.08377
+          -106.6474,35.08377
+          -106.6474,35.08374
+          -106.6474,35.0837
+          -106.6474,35.08364
+          -106.6476,35.08257
+          -106.6477,35.08254
+          -106.6484,35.08263
+        </coordinates>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <name>Segment # 2</name>
+      <description></description>
+      <styleUrl>#RouteColor</styleUrl>
+      <LineString>
+        <extrude>1</extrude>
+        <tessellate>1</tessellate>
+        <altitudeMode>clampToGround</altitudeMode>
+        <coordinates>
+          -106.6482,35.08308
+          -106.6488,35.08317
+          -106.6494,35.08325
+          -106.6506,35.0834
+          -106.6504,35.0844
+          -106.6502,35.08541
+          -106.65,35.08654
+          -106.6497,35.08804
+          -106.6495,35.08903
+          -106.6491,35.09104
+          -106.6504,35.09118
+          -106.6516,35.09134
+          -106.6518,35.09031
+          -106.652,35.08931
+          -106.6521,35.08832
+          -106.6523,35.08743
+          -106.6524,35.0869
+          -106.6525,35.0864
+          -106.6526,35.08571
+          -106.6528,35.08472
+          -106.653,35.08369
+          -106.6532,35.08274
+          -106.652,35.08256
+          -106.6508,35.08241
+          -106.6506,35.0834
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>

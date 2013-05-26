@@ -1,0 +1,116 @@
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent" 
+	android:orientation="vertical"
+	android:background="@drawable/background_bitmap"
+	android:layout_marginTop="3dp" >
+
+	<LinearLayout
+	    android:layout_width="fill_parent" 
+	    android:layout_height="fill_parent" 
+	    android:layout_weight="1" >
+	
+	    <Button android:id="@+id/sportBtn" 
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent" 
+	        android:layout_marginRight="3dp"
+	        android:layout_marginBottom="3dp"
+	        android:layout_weight="1"
+	        android:gravity="bottom|right"
+	        android:padding="8dp"
+	        android:background="@color/trans_black"
+	        android:textColor="@color/white"	
+	        android:textStyle="bold"
+	        android:text="Sport Venues" />
+	
+	    <Button android:id="@+id/historBtn" 
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent" 
+	        android:layout_weight="1"
+	        android:layout_marginLeft="3dp"
+	        android:layout_marginBottom="3dp"
+	        android:gravity="bottom|right"
+	        android:background="@color/trans_black"
+	        android:textColor="@color/white"	
+	        android:textStyle="bold"        
+	        android:padding="8dp"
+	        android:text="Historical Places"
+	         />
+	</LinearLayout>
+	
+	<Button 
+	    android:id="@+id/ad" 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:background="@drawable/banner"  
+	    android:layout_marginLeft="1dp"
+	    android:layout_marginRight="1dp"
+	    android:text="3" />
+	
+	<LinearLayout
+	    android:layout_width="fill_parent" 
+	    android:layout_height="fill_parent" 
+	    android:layout_weight="1" >
+	
+	    <Button android:id="@+id/bbBtn" 
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent" 
+	        android:layout_weight="1"
+	        android:layout_marginRight="3dp"
+	        android:layout_marginBottom="3dp"
+	        android:gravity="bottom|right"
+	        android:background="@color/trans_black"
+	        android:textColor="@color/white"	
+	        android:textStyle="bold"        
+	        android:padding="8dp"
+
+	        android:text="Breaking Bad Filmming Spots"
+	        />
+	        
+	
+	    <Button android:id="@+id/publicArtBtn" 
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent" 
+	        android:layout_weight="1"
+	        android:layout_marginLeft="3dp"
+	        android:layout_marginBottom="3dp"
+	        android:gravity="bottom|right"
+	        android:background="@color/trans_black"
+	        android:textColor="@color/white"	
+	        android:textStyle="bold"        
+	        android:padding="8dp"
+	        android:text="Public Art" />
+	</LinearLayout>
+	<LinearLayout
+	    android:layout_width="fill_parent" 
+	    android:layout_height="fill_parent" 
+	    android:layout_weight="1" >
+	
+	    <Button android:id="@+id/button5" 
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent" 
+	        android:layout_weight="1"
+	        android:layout_marginRight="3dp"
+	        android:layout_marginBottom="3dp"
+	        android:gravity="bottom|right"
+	        android:background="@color/trans_black"
+	        android:textColor="@color/white"	
+	        android:textStyle="bold"        
+	        android:padding="8dp"
+	        android:text="505 Project" />
+	
+	    <Button android:id="@+id/bike" 
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent" 
+	        android:layout_weight="1"
+	        android:layout_marginLeft="3dp"
+	        android:layout_marginBottom="3dp"
+	        android:gravity="bottom|right"
+	        android:background="@color/trans_black"
+	        android:textColor="@color/white"	
+	        android:textStyle="bold"        
+	        android:padding="8dp"
+	        android:text="Bicycling map" />
+	</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,13 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="default_text_color">#FFEAEAEA</color>
+    <color name="rabq_red">#f04f4f</color>
+    <color name="grey_">#363636</color>
+    <color name="white">#ffffff</color>
+    <color name="f_yellow">#ffc53d</color>
+    <color name="f_blue">#80a6ff</color>
+    <color name="trans_black">#64000000</color>
+    <color name="light_grey">#a7adaa</color>
+    <color name="concrete">#7F8C8D</color>
+</resources>
