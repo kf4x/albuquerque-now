@@ -17,6 +17,7 @@ package com.example.albuquerquenow;
 //import com.google.android.gms.maps.model.PolylineOptions;
 //import android.graphics.Color;
 //import android.os.AsyncTask;
+
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -57,7 +58,7 @@ public class RailTransitMap extends MapActivity{
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
-		new AddMapObjsTask(this).execute("https://maps.google.com/maps/ms?ie=UTF8&t=m&source=embed&msa=0&output=kml&msid=201876092879256242075.0004c7b592eaf1c192359");
+		new KmlTask(this).execute("https://maps.google.com/maps/ms?ie=UTF8&t=m&source=embed&msa=0&output=kml&msid=201876092879256242075.0004c7b592eaf1c192359");
 		super.onResume();
 	}
 

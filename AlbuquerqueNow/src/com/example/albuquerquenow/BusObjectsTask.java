@@ -1,6 +1,8 @@
+
+
+
 package com.example.albuquerquenow;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -12,67 +14,57 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.os.AsyncTask;
-import android.util.Log;
+
+import com.example.albuquerquenow.R;
+import com.example.albuquerquenow.R.drawable;
 import com.example.albuquerquenow.util.KmlParse;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-public class AddMapObjsTask extends AsyncTask<String, Void, List<Object>>{
+
+public class BusObjectsTask extends AsyncTask<String, Void, List<Object>>{
     private JSONObject json;
     private JSONArray marks;
     private Activity activity;
-
+    private OnCompleteCB callback;
     
-    public AddMapObjsTask(Activity a) {
+    public BusObjectsTask(Activity a) {
 		// TODO Auto-generated constructor stub
     	activity = a;
 	}
-
+    public BusObjectsTask(Activity a, OnCompleteCB c) {
+		// TODO Auto-generated constructor stub
+    	activity = a;
+    	callback = c;
+	}   
     
-    @Override
-    protected void onPreExecute() {
-    	// TODO Auto-generated method stub
-    	
-    	super.onPreExecute();
-    }
-
     @Override
     protected List<Object> doInBackground(String... params) {
     	//KmlParse p = new KmlParse();
     	List<Object> mapObjects = new ArrayList<Object>();
+    	Matrix mat = new Matrix();
     	try {
-    		
-//    		if (((MapActivity)activity).useOfflineRoutes == true) {
-//    			//json = new KmlToJSON().KMLFromFile(activity.getAssets().open(params[0]));
-//    			
-//    			if (params.length < 2) {
-//    				json = new KmlParse().KMLFromFile(activity.getAssets().open(params[0]));
-//    				
-//				} else if (params[1] == "kmz"){
-//					
-//					json = new KmlParse().KMZFromFile(new File(params[0]),Environment.getExternalStorageDirectory() + "/New Folder");
-//				}
-//			} else if (!((MapActivity)activity).useOfflineRoutes) {
-//				Log.d("=====", params[0] +"");
-//    			if (params.length < 2) {
-//    				Log.d("=====", params[0] +"");
-//    				json = new KmlParse().KMLFromURL(new URL(params[0]));
-//    				
-//				} else if (params[1] == "kmz"){
-//					Log.d("=====", params[0] +"");
-//					
-//				}
-//				
-////				json = new KmlParse().KMZFromURL(new URL(params[0]), Environment.getExternalStorageDirectory() + "/New Folder");
-//
-//			}			
-//    		json = new KmlParse().KMZFromURL(new URL(params[0]), Environment.getExternalStorageDirectory() + "/New Folder");
-    		json = new KmlParse().KMLFromURL(new URL(params[0]));
-//			json = new KmlParse().KMZFromFile(new File(params[0]),Environment.getExternalStorageDirectory() + "/New Folder");
+    		//if (activity instanceof MapActivity) {
+    		//Log.d("testing this", String.valueOf(params.length));
+    		if (((MapActivity)activity).useOfflineRoutes == true && params[2].isEmpty()) {
+    			json = new KmlParse().KMLFromFile(activity.getAssets().open("routes/"+params[1]));
+    			//Log.d("testing this", params[1]);
+			} else if (!((MapActivity)activity).useOfflineRoutes) {
+				json = new KmlParse().KMLFromURL(new URL(params[0] + params[1]));
+			} else if (params[2].contains("bus")) {
+				json = new KmlParse().KMLFromURL(new URL(params[0] + params[1]));
+			} else if (params[2].contains("fullurl")) {
+				json = new KmlParse().KMLFromURL(new URL(params[0]));
+			}			
+			//}
 
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -90,23 +82,27 @@ public class AddMapObjsTask extends AsyncTask<String, Void, List<Object>>{
         try {
 //            response = json.getJSONObject("placemarks");
             marks = json.getJSONArray("placemarks");
-         
-            Log.d("=====", "json" + marks.length());
+            //markerMap.clear();
+            
+            
+
             for (int i = 0; i < marks.length(); i++) {
                 JSONObject v = marks.getJSONObject(i);
-                String name ="";
+                String name ="";double heading=0;
                 try {
                 	name = v.getString("name");
+                	heading = v.getDouble("heading");
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
                
+                
                 String desc = v.getString("description");
 
                 JSONArray loc = v.getJSONArray("geometry");
 
                 //JSONArray coord = v.getJSONArray("coordinates");
-                JSONObject coordinates = loc.getJSONObject(0);			//<<=====
+                JSONObject coordinates = loc.getJSONObject(0);
                 
                 if (coordinates.getString("type") == "linestring") {
                     JSONArray coord =  coordinates.getJSONArray("coordinates");
@@ -130,18 +126,28 @@ public class AddMapObjsTask extends AsyncTask<String, Void, List<Object>>{
  
 						double lt = ll.getDouble("lat");
 						double lg = ll.getDouble("lng");
+						
 //						Log.d("lat stuff", lt + " " + lg);
 						markOptions.position(new LatLng(lt, lg));
 					}
                     
+                    mat.preRotate((float) heading);///in degree
+                    Bitmap mBitmap = BitmapFactory.decodeResource(activity.getResources(), R.drawable.arrows);
+                    mBitmap = Bitmap.createBitmap(mBitmap, 0, 0, mBitmap.getWidth(), mBitmap.getHeight(), mat, true);
+                    
+                    
                     markOptions.snippet(desc);
                     markOptions.title(name);
-                    markOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    markOptions.icon(BitmapDescriptorFactory.fromBitmap(mBitmap));
                     mapObjects.add(markOptions);
-                   
+                    mBitmap.recycle();
+                    mat.reset();
 				}
+                
+
 
             }
+            
         } catch (JSONException ex) {
             Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e) {
@@ -153,19 +159,24 @@ public class AddMapObjsTask extends AsyncTask<String, Void, List<Object>>{
 
     @Override
     protected void onPostExecute(List<Object> result) {
-    	Log.d("=====", "done");
+    	List<Marker> l = new ArrayList<Marker>();
     	if(result.size() > 0){
 			for (int i = 0; i < result.size(); i++) {
 				//googlemap.addPolyline(result.get(i));
 				if (result.get(i) instanceof PolylineOptions && activity instanceof MapActivity) {
 					((MapActivity)activity).googlemap.addPolyline((PolylineOptions) result.get(i));
-				} else if (result.get(i) instanceof MarkerOptions && activity instanceof MapActivity) {
-					((MapActivity)activity).googlemap.addMarker((MarkerOptions) result.get(i));
+				} else if (result.get(i) instanceof MarkerOptions) {
+					Marker marker = ((MapActivity)activity).googlemap.addMarker((MarkerOptions) result.get(i));
+					l.add(marker);
 				}
+//				(PolylineOptions) result.get(i))
 			}
 
     	}
-
+    	
+    	if (callback != null) {
+    		callback.OnCompleteCB(l);
+		}
         super.onPostExecute(result);
     }
 

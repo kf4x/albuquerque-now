@@ -1,6 +1,9 @@
 package com.example.albuquerquenow;
 
 import java.util.List;
+
+import com.example.albuquerquenow.hlperobj.AtmData;
+
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;

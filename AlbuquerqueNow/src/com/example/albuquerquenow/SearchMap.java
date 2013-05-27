@@ -3,6 +3,8 @@ package com.example.albuquerquenow;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.example.albuquerquenow.fetch.JSONFetch;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;

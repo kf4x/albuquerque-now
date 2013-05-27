@@ -1,4 +1,4 @@
-package com.example.albuquerquenow;
+package com.example.albuquerquenow.fetch;
 
 import java.io.IOException;
 import java.net.URL;
@@ -6,6 +6,8 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import com.example.albuquerquenow.hlperobj.AtmData;
 
 public class AtmDataFetch {
 	private String sense;

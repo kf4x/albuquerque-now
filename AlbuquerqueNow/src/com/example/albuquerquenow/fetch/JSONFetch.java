@@ -1,4 +1,4 @@
-package com.example.albuquerquenow;
+package com.example.albuquerquenow.fetch;
 
 import java.io.InputStream;
 

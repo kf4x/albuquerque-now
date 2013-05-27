@@ -1,6 +1,7 @@
 package com.example.albuquerquenow;
 
 
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,10 +17,10 @@ public class ExploreMap extends MapActivity {
 
 		if (kmz != null && url != null) {
 //			Log.d("=====","kmz");
-			new AddMapObjsTask(this).execute(url, kmz);
+			new KmlTask(this).execute(url, kmz);
 		} else if (url != null) {
 //			Log.d("=====","url");
-			new AddMapObjsTask(this).execute(url);
+			new KmlTask(this).execute(url);
 		}
 		
 		

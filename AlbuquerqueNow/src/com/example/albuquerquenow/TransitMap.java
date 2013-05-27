@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+
 import com.google.android.gms.maps.model.Marker;
 
 
@@ -133,18 +134,18 @@ public class TransitMap extends MapActivity implements ActionBar.OnNavigationLis
 		String routeURL = "http://data.cabq.gov/transit/realtime/trace/";		
 		String routeFilename = "trace" + busNumber[i]+ ".kml";
 		
-		new AddTransMapObjTask(this).execute(routeURL, routeFilename, "");
+		new BusObjectsTask(this).execute(routeURL, routeFilename, "");
 		//new AddLiveBus().execute("http://data.cabq.gov/community/art/publicart/PublicArt.kmz");
 		return false;
 	}
     
     private boolean plotBus(int i) {
 		if (i == 40) {
-			new AddTransMapObjTask(this,this).execute("http://data.cabq.gov/transit/UNM/shuttle.kml","","fullurl");
+			new BusObjectsTask(this,this).execute("http://data.cabq.gov/transit/UNM/shuttle.kml","","fullurl");
 		} else{
 	    	String busURL = "http://data.cabq.gov/transit/realtime/introute/";
 	    	String busFilename = "introute" + busNumber[i]+ ".kml";
-			new AddTransMapObjTask(this, this).execute(busURL, busFilename, "bus");
+			new BusObjectsTask(this, this).execute(busURL, busFilename, "bus");
     	}
     	return false;
 	}

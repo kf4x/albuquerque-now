@@ -8,6 +8,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 import com.example.albuquerquenow.WeatherArrayAdapter.ViewHolder;
+import com.example.albuquerquenow.fetch.AtmDataFetch;
+import com.example.albuquerquenow.hlperobj.AtmData;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -42,7 +45,7 @@ public class WeatherActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_weather);
 		progressLayout = (LinearLayout) findViewById(R.id.progress_indic_layout);
-		
+		liveCam = (ImageView)  findViewById(R.id.camera);
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setDisplayShowTitleEnabled(false);
 		getActionBar().setIcon(R.drawable.home);
@@ -70,7 +73,7 @@ public class WeatherActivity extends ListActivity {
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
-		liveCam = (ImageView)  findViewById(R.id.camera);
+		
 		liveCam.setTag("http://wwc.instacam.com/instacamimg/KOBTV/KOBTV_s.jpg");
 		
 		new FetchDataAsync(this).execute();
@@ -254,6 +257,13 @@ public class WeatherActivity extends ListActivity {
 			}
 		    return bm;  
 		}
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		this.finish();
+		super.onPause();
 	}
 
 }
