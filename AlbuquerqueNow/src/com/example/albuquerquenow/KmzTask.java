@@ -1,5 +1,6 @@
 package com.example.albuquerquenow;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -7,12 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.util.Log;
 
 import com.example.albuquerquenow.util.KmlParse;
@@ -21,16 +25,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-public class KmlTask extends AsyncTask<String, Void, List<Object>>{
+public class KmzTask extends AsyncTask<String, Void, List<Object>>{
     private Activity activity;
 
-    
-    public KmlTask(Activity a) {
+    public KmzTask(Activity a) {
 		// TODO Auto-generated constructor stub
+    	
     	activity = a;
 	}
-
-    
     @Override
     protected void onPreExecute() {
     	// TODO Auto-generated method stub
@@ -40,39 +42,20 @@ public class KmlTask extends AsyncTask<String, Void, List<Object>>{
 
     @Override
     protected List<Object> doInBackground(String... params) {
-        JSONArray marks;
-        JSONObject json = null;
+    	JSONObject json = null;
+    	JSONArray marks;
     	//KmlParse p = new KmlParse();
     	List<Object> mapObjects = new ArrayList<Object>();
     	try {
     		
-//    		if (((MapActivity)activity).useOfflineRoutes == true) {
-//    			//json = new KmlToJSON().KMLFromFile(activity.getAssets().open(params[0]));
-//    			
-//    			if (params.length < 2) {
-//    				json = new KmlParse().KMLFromFile(activity.getAssets().open(params[0]));
-//    				
-//				} else if (params[1] == "kmz"){
-//					
-//					json = new KmlParse().KMZFromFile(new File(params[0]),Environment.getExternalStorageDirectory() + "/New Folder");
-//				}
-//			} else if (!((MapActivity)activity).useOfflineRoutes) {
-//				Log.d("=====", params[0] +"");
-//    			if (params.length < 2) {
-//    				Log.d("=====", params[0] +"");
-//    				json = new KmlParse().KMLFromURL(new URL(params[0]));
-//    				
-//				} else if (params[1] == "kmz"){
-//					Log.d("=====", params[0] +"");
-//					
-//				}
-//				
-////				json = new KmlParse().KMZFromURL(new URL(params[0]), Environment.getExternalStorageDirectory() + "/New Folder");
-//
-//			}			
-//    		json = new KmlParse().KMZFromURL(new URL(params[0]), Environment.getExternalStorageDirectory() + "/New Folder");
-    		json = new KmlParse().KMLFromURL(new URL(params[0]));
-//			json = new KmlParse().KMZFromFile(new File(params[0]),Environment.getExternalStorageDirectory() + "/New Folder");
+    		if (((MapActivity)activity).useOfflineRoutes == true) {
+    			
+    			json = new KmlParse().KMZFromFile(new File(params[0]),Environment.getExternalStorageDirectory() + "/New Folder");
+			} 
+    		else if (!((MapActivity)activity).useOfflineRoutes) {
+				Log.d("called !useofflineroutes", params[0]);
+				json = new KmlParse().KMZFromURL(new URL(params[0]),Environment.getExternalStorageDirectory() + "/New Folder");
+			}			
 
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block

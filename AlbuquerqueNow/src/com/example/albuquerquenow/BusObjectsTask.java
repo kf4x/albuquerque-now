@@ -13,15 +13,14 @@ import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.os.AsyncTask;
-
 import com.example.albuquerquenow.R;
-import com.example.albuquerquenow.R.drawable;
 import com.example.albuquerquenow.util.KmlParse;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -31,8 +30,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 
 public class BusObjectsTask extends AsyncTask<String, Void, List<Object>>{
-    private JSONObject json;
-    private JSONArray marks;
+
     private Activity activity;
     private OnCompleteCB callback;
     
@@ -48,6 +46,8 @@ public class BusObjectsTask extends AsyncTask<String, Void, List<Object>>{
     
     @Override
     protected List<Object> doInBackground(String... params) {
+        JSONObject json = null;
+        JSONArray marks;
     	//KmlParse p = new KmlParse();
     	List<Object> mapObjects = new ArrayList<Object>();
     	Matrix mat = new Matrix();

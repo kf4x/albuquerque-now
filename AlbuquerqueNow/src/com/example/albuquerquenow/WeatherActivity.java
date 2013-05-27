@@ -44,8 +44,11 @@ public class WeatherActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_weather);
+		
+		
+		
 		progressLayout = (LinearLayout) findViewById(R.id.progress_indic_layout);
-		liveCam = (ImageView)  findViewById(R.id.camera);
+
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setDisplayShowTitleEnabled(false);
 		getActionBar().setIcon(R.drawable.home);
@@ -68,21 +71,13 @@ public class WeatherActivity extends ListActivity {
 //		});
 		
 		lv.setOnItemClickListener(itemClick());
+		
+		liveCam = (ImageView)  findViewById(R.id.camera);
+		liveCam.setTag("http://wwc.instacam.com/instacamimg/KOBTV/KOBTV_s.jpg");
+
+
 	}
 	
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		
-		liveCam.setTag("http://wwc.instacam.com/instacamimg/KOBTV/KOBTV_s.jpg");
-		
-		new FetchDataAsync(this).execute();
-		
-		
-		new DownloadImageTask().execute(liveCam);
-
-		super.onResume();
-	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -200,7 +195,7 @@ public class WeatherActivity extends ListActivity {
 		
 	}
 	
-	public class DownloadImageTask extends AsyncTask<ImageView, Void, Bitmap> {
+	private class DownloadImageTask extends AsyncTask<ImageView, Void, Bitmap> {
 
 		ImageView imageView = null;
 
@@ -235,6 +230,7 @@ public class WeatherActivity extends ListActivity {
 			    c.drawCircle(imageView.getDrawable().getBounds().width()/2, imageView.getDrawable().getBounds().height()/2, imageView.getDrawable().getBounds().height()/2, paint);
 
 			} 
+
 		}
 
 
@@ -251,7 +247,7 @@ public class WeatherActivity extends ListActivity {
 		        is.close();
 		    } catch (IOException e) {
 
-		        //Log.e("ERRRR","IO: " + e.getMessage().toString());
+		        Log.e("ERRRR","IO: " + e.getMessage().toString());
 		    } catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -265,5 +261,13 @@ public class WeatherActivity extends ListActivity {
 		this.finish();
 		super.onPause();
 	}
-
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		new FetchDataAsync(this).execute();
+		
+		new DownloadImageTask().execute(liveCam); //must be called after fetching data
+		
+		super.onResume();
+	}
 }

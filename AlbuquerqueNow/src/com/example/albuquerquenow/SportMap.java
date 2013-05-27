@@ -32,7 +32,43 @@ public class SportMap extends MapActivity implements ActionBar.OnNavigationListe
 	}
 	@Override
 	public boolean onNavigationItemSelected(int arg0, long arg1) {
-		// TODO Auto-generated method stub
+		String url = "";
+
+		switch (arg0) {
+		case 0:
+			url = "https://maps.google.com/maps/ms?hl=en&gl=us&ptab=2&ie=UTF8&oe=UTF8&authuser=0&msa=0&output=kml&msid=212436961353859021350.0004b2e5e761b1f8bb9ac";
+			break;
+		
+		case 1:
+			url = "https://maps.google.com/maps/ms?hl=en&gl=us&ptab=2&ie=UTF8&oe=UTF8&authuser=0&msa=0&output=kml&msid=212436961353859021350.0004b0b1c17bce10ed5e4";
+			break;
+		
+		case 2:
+			url = "https://maps.google.com/maps/ms?hl=en&gl=us&ptab=2&ie=UTF8&oe=UTF8&authuser=0&msa=0&output=kml&msid=212436961353859021350.0004a16f8b578adc71335";
+			break;
+		case 3:
+			url = "https://maps.google.com/maps/ms?hl=en&gl=us&ptab=2&ie=UTF8&oe=UTF8&authuser=0&msa=0&output=kml&msid=212436961353859021350.00044bb43ac436fe75755";
+			break;
+			
+		case 4:
+			url = "https://maps.google.com/maps/ms?hl=en&gl=us&ptab=2&ie=UTF8&oe=UTF8&authuser=0&msa=0&output=kml&msid=212436961353859021350.00044d9bf0aa34e87f9f1";
+			break;
+		
+		case 5:
+			url = "https://maps.google.com/maps/ms?hl=en&gl=us&ptab=2&ie=UTF8&oe=UTF8&authuser=0&msa=0&output=kml&msid=212436961353859021350.000445ac22cf6155f168d";
+			break;
+		default:
+			break;
+		}
+		googlemap.clear();
+		new KmlTask(this).execute(url);
 		return false;
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		googlemap.clear();
+		super.onPause();
 	}
 }

@@ -3,7 +3,6 @@ package com.example.albuquerquenow;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 
 public class ExploreMap extends MapActivity {
@@ -11,15 +10,16 @@ public class ExploreMap extends MapActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Bundle extras = getIntent().getExtras();
-		String kmz, url;
+		useOfflineRoutes = false;
+		String kmz = null, url = null;
 		url = extras.getString("url");
 		kmz = extras.getString("kmz");
 
 		if (kmz != null && url != null) {
-//			Log.d("=====","kmz");
-			new KmlTask(this).execute(url, kmz);
+			//Log.d("=====","kmz");
+			new KmzTask(this).execute(url);
 		} else if (url != null) {
-//			Log.d("=====","url");
+			//Log.d("=====","url");
 			new KmlTask(this).execute(url);
 		}
 		
