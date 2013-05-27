@@ -50,11 +50,11 @@ public class KmzTask extends AsyncTask<String, Void, List<Object>>{
     		
     		if (((MapActivity)activity).useOfflineRoutes == true) {
     			
-    			json = new KmlParse().KMZFromFile(new File(params[0]),Environment.getExternalStorageDirectory() + "/New Folder");
+    			json = new KmlParse().KMZFromFile(new File(params[0]),Environment.getExternalStorageDirectory() + "/abqnowkml");
 			} 
     		else if (!((MapActivity)activity).useOfflineRoutes) {
 				Log.d("called !useofflineroutes", params[0]);
-				json = new KmlParse().KMZFromURL(new URL(params[0]),Environment.getExternalStorageDirectory() + "/New Folder");
+				json = new KmlParse().KMZFromURL(new URL(params[0]),Environment.getExternalStorageDirectory() + "/abqnowkml");
 			}			
 
 		} catch (NumberFormatException e) {

@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import com.example.albuquerquenow.hlperobj.AtmData;
 
+
 public class AtmDataFetch {
 	private String sense;
 	private String reading;

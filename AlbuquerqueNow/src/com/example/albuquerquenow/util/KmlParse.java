@@ -19,6 +19,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+// 	 	///	///	///	///this version NOT extending Scanner!
 public class KmlParse {
 
     private JSONObject json = new JSONObject();
@@ -72,9 +74,9 @@ public class KmlParse {
     } 
     /**
      * 
-     * @param f 
-     * @param outputFolder
-     * @return
+     * @param f path to local file
+     * @param outputFolder folder with rw access to extract kmz to kml NOTE: contents will not be deleted
+     * @return JSON object
      * @throws FileNotFoundException
      * @throws IOException
      * @throws NumberFormatException
@@ -85,7 +87,15 @@ public class KmlParse {
     	zis = new ZipInputStream(new FileInputStream(f));
         return KMLFromFile(unzip(outputFolder));
     }
-    
+    /**
+     * 
+     * @param url path to KMZ file
+     * @param tmpFolder folder with rw access to extract kmz to kml NOTE: contents will not be deleted
+     * @return JSON object
+     * @throws IOException
+     * @throws NumberFormatException
+     * @throws JSONException
+     */
     public JSONObject KMZFromURL(URL url, String tmpFolder) throws IOException, NumberFormatException, JSONException {
         
     	KMZUrl = url;
@@ -243,20 +253,13 @@ public class KmlParse {
                                     
                                     try {
                                     	latList.add(latlngArray[1]); //error
-                                    	//if (coordinates.substring(comma+1).contains(",")) {
-                                    	//	int commaTwo = coordinates.substring(comma+1).indexOf(",");
-                                    		lngList.add(latlngArray[0]);
-										//} else{
-											//lngList.add(coordinates.substring(comma+1));
-										//}
-                                        
-                                       // System.out.println("------------"+coordinates.substring(0, comma));
-                                       // System.out.println(coordinates.substring(comma+1));
+
+                                    	lngList.add(latlngArray[0]);
+
 									} catch (Exception e) {
 										// TODO: handle exception
-										//System.out.println("Error");
-										//System.out.println("Coordinates: " + coordinates);
-										//System.out.println("comma: " + comma);
+										System.out.println("Error");
+										e.printStackTrace();
 									}
                                     
                                     
@@ -314,11 +317,8 @@ public class KmlParse {
                     	line = in.nextLine();
 					} catch (Exception e) {
 						// TODO: handle exception
+						e.printStackTrace();
 					}
-                    
-                    
-                   // marker.put("description ", "");
-                   // marker.put("point", "");
 
                 }
                 heading = "";
@@ -327,18 +327,10 @@ public class KmlParse {
             }
             json.put("placemarks", markerArray);
 
-            //if (line.contains("</Placemark>")){
-            //    continue;
-           // }
 
         }
 
         in.close();
-        
-        //System.out.print(markerNumber);
-        //System.out.print(json.toString());
-
-
 
     }
     

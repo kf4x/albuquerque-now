@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class ExploreActivity extends Activity {
+public class ExploreActivity extends Activity{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +22,10 @@ public class ExploreActivity extends Activity {
 		((Button)findViewById(R.id.publicArtBtn)).setOnClickListener(exploreBtn());
 		((Button)findViewById(R.id.sportBtn)).setOnClickListener(exploreBtn());
 		((Button)findViewById(R.id.bbBtn)).setOnClickListener(exploreBtn());
-//		((Button)findViewById(R.id.bbBtn)).setOnClickListener(exploreBtn());
+		((Button)findViewById(R.id.bbBtn)).setOnClickListener(exploreBtn());
+		
 
-	}
+	}	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
@@ -66,5 +67,19 @@ public class ExploreActivity extends Activity {
 			}
 		};
 	}
-
+	/* going to implement a tilt of each button on slide up and down similar to flipboard
+	public void tilt(final View v, final float deg) {
+		v.setRotationX(deg);
+		
+		v.postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				v.setRotationX(0);
+			}
+		}, 300);
+	}
+	
+	*/
 }
