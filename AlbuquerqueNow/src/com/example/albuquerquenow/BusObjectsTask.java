@@ -20,6 +20,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.os.AsyncTask;
+import android.widget.Toast;
+
 import com.example.albuquerquenow.R;
 import com.example.albuquerquenow.util.KmlParse;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -176,6 +178,9 @@ public class BusObjectsTask extends AsyncTask<String, Void, List<Object>>{
     	
     	if (callback != null) {
     		callback.OnCompleteCB(l);
+    		int f = l.size() ;
+    		Toast.makeText(activity, f + " bus" + ((f == 1)? "":"es") +" with known locations.", Toast.LENGTH_SHORT).show();
+    		
 		}
         super.onPostExecute(result);
     }

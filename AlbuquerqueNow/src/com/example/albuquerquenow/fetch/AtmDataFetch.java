@@ -31,9 +31,7 @@ public class AtmDataFetch {
 		Scanner in = null;
 		List<AtmData> data = new ArrayList<AtmData>();
 		
-		
-        
-        
+
 		try {
 			URLConnection connection = url.openConnection();
 	        connection.connect();
@@ -109,6 +107,7 @@ public class AtmDataFetch {
 		return fixList(result);
 	}
 	
+	//
 	private List<AtmData> fixList(List<AtmData> l){
 
 		for (int i = 0; i < l.size(); i++) {
@@ -122,26 +121,8 @@ public class AtmDataFetch {
 		return l;
 	}
 	
-//	private List<AtmData> fixList(List<AtmData> l){
-//		List<AtmData> result =new ArrayList<AtmData>();
-//
-//		for (int i = 0; i < l.size(); i++) {
-//			if (l.get(i).getData() == "G" || l.get(i).getData() == "B") {
-//				boolean b = (l.get(i).getData() == "G")? true:false;
-//				l.get(i-1).setReliable(b);
-//				result.add(l.get(i-1));
-////				l.remove(i);
-//			}
-//			else{
-//				result.add(l.get(i));
-//			}
-//		}
-//		
-//		return result;
-//	}
 	private String tile(String string){
-	    final String ACTIONABLE_DELIMITERS = " '-/"; // these cause the character following
-        // to be capitalized
+	    final String ACTIONABLE_DELIMITERS = " '-/"; // these cause the character following to be capitalized
 
 		StringBuilder sb = new StringBuilder();
 		boolean capNext = true;
@@ -149,7 +130,7 @@ public class AtmDataFetch {
 		for (char c : string.toCharArray()) {
 			c = (capNext) ? Character.toUpperCase(c) : Character.toLowerCase(c);
 			sb.append(c);
-			capNext = (ACTIONABLE_DELIMITERS.indexOf((int) c) >= 0); // explicit cast not needed
+			capNext = (ACTIONABLE_DELIMITERS.indexOf((int) c) >= 0); 
 		}
 		return sb.toString();
     }

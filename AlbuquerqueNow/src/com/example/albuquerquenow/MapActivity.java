@@ -20,7 +20,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -152,7 +151,7 @@ public class MapActivity extends Activity implements LocationListener {
 			public void onMapLongClick(LatLng arg0) {
 				// TODO Auto-generated method stub
 				toggleTraffic().show();
-				Log.i(arg0.toString(), "User long clicked");
+				//Log.i(arg0.toString(), "User long clicked");
 			}
 		};
 	}
@@ -160,10 +159,10 @@ public class MapActivity extends Activity implements LocationListener {
 	@Override
 	public void onLocationChanged(Location location) {
 		// TODO Auto-generated method stub
-		LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
+		//LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
 		
-		googlemap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
-		googlemap.animateCamera(CameraUpdateFactory.zoomTo(10));
+		//googlemap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
+		//googlemap.animateCamera(CameraUpdateFactory.zoomTo(10));
 		
 	}
 

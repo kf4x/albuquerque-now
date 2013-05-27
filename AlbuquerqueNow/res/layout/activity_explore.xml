@@ -24,7 +24,7 @@
 	        android:textStyle="bold"
 	        android:text="Sport Venues" />
 	
-	    <Button android:id="@+id/historBtn" 
+	    <Button android:id="@+id/dogBtn" 
 	        android:layout_width="fill_parent"
 	        android:layout_height="fill_parent" 
 	        android:layout_weight="1"
@@ -35,7 +35,7 @@
 	        android:textColor="@color/white"	
 	        android:textStyle="bold"        
 	        android:padding="8dp"
-	        android:text="Historical Places"
+	        android:text="Dog Parks"
 	         />
 	</LinearLayout>
 	
@@ -87,7 +87,7 @@
 	    android:layout_height="fill_parent" 
 	    android:layout_weight="1" >
 	
-	    <Button android:id="@+id/button5" 
+	    <Button android:id="@+id/wifi" 
 	        android:layout_width="fill_parent"
 	        android:layout_height="fill_parent" 
 	        android:layout_weight="1"
@@ -98,7 +98,7 @@
 	        android:textColor="@color/white"	
 	        android:textStyle="bold"        
 	        android:padding="8dp"
-	        android:text="505 Project" />
+	        android:text="Wifi locations" />
 	
 	    <Button android:id="@+id/bike" 
 	        android:layout_width="fill_parent"

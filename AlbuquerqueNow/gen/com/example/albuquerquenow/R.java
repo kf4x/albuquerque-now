@@ -184,14 +184,15 @@ containing a value of this type.
         public static final int cloud=0x7f020005;
         public static final int container_dropshadow=0x7f020006;
         public static final int extra_clean_paper=0x7f020007;
-        public static final int home=0x7f020008;
-        public static final int ic_launcher=0x7f020009;
-        public static final int list_focused_stylingactionbar=0x7f02000a;
-        public static final int location=0x7f02000b;
-        public static final int move=0x7f02000c;
-        public static final int refresh=0x7f02000d;
-        public static final int traffic_lights_pyramid=0x7f02000e;
-        public static final int zoom=0x7f02000f;
+        public static final int gradient=0x7f020008;
+        public static final int home=0x7f020009;
+        public static final int ic_launcher=0x7f02000a;
+        public static final int list_focused_stylingactionbar=0x7f02000b;
+        public static final int location=0x7f02000c;
+        public static final int move=0x7f02000d;
+        public static final int refresh=0x7f02000e;
+        public static final int traffic_lights_pyramid=0x7f02000f;
+        public static final int zoom=0x7f020010;
     }
     public static final class id {
         public static final int about_readings=0x7f050030;
@@ -201,15 +202,14 @@ containing a value of this type.
         public static final int bbBtn=0x7f050008;
         public static final int bike=0x7f05000b;
         public static final int bus_refresh=0x7f05002f;
-        public static final int button5=0x7f05000a;
         public static final int camera=0x7f05001a;
         public static final int category=0x7f050016;
         public static final int code=0x7f050014;
+        public static final int dogBtn=0x7f050006;
         public static final int dummy_button=0x7f05000e;
         public static final int fullscreen_content=0x7f05000c;
         public static final int fullscreen_content_controls=0x7f05000d;
         public static final int header=0x7f050023;
-        public static final int historBtn=0x7f050006;
         public static final int hybrid=0x7f050004;
         public static final int importance_lbl=0x7f05001f;
         public static final int l_map=0x7f050010;
@@ -243,6 +243,7 @@ containing a value of this type.
         public static final int type=0x7f050021;
         public static final int warn=0x7f050015;
         public static final int webview=0x7f050022;
+        public static final int wifi=0x7f05000a;
     }
     public static final class layout {
         public static final int activity_explore=0x7f030000;
