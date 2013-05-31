@@ -2,7 +2,6 @@ package com.javierc.albuquerquenow;
 
 import java.util.List;
 
-import com.javierc.albuquerquenow.R;
 import com.javierc.albuquerquenow.hlperobj.AtmData;
 
 import android.app.Activity;

@@ -63,12 +63,6 @@
             android:label="@string/title_activity_map" >
         </activity>
         <activity
-            android:name="com.javierc.albuquerquenow.LegalNoticesActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_legal_notices"
-            android:theme="@style/FullscreenTheme" >
-        </activity>
-        <activity
             android:name="com.javierc.albuquerquenow.TransitMap"
             android:label="@string/title_activity_transit_map" >
         </activity>

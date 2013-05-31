@@ -5,10 +5,10 @@ package com.javierc.albuquerquenow;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.Menu;
-import com.javierc.albuquerquenow.R;
 
 public class ExploreMap extends MapActivity {
 	ProgressDialog pdialog;
+	String kmz = null, url = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getActionBar().setHomeButtonEnabled(true);
@@ -17,22 +17,15 @@ public class ExploreMap extends MapActivity {
 		
 		Bundle extras = getIntent().getExtras();
 		useOfflineRoutes = false;
-		String kmz = null, url = null;
+		
 		url = extras.getString("url");
 		kmz = extras.getString("kmz");
 		pdialog=new ProgressDialog(this);
 		pdialog.setCancelable(false);
-		pdialog.setMessage("Downloading and plotting....");
-		pdialog.show();
 
-		if (kmz != null && url != null) {
-			//Log.d("=====","kmz");
-			new KmzTask(this).execute(url);
-		} else if (url != null) {
-			//Log.d("=====","url");
-			new KmlTask(this).execute(url);
-		}
-		
+
+
+		 runTask();
 
 		super.onCreate(savedInstanceState);
 
@@ -51,5 +44,24 @@ public class ExploreMap extends MapActivity {
 		googlemap.clear();
 		super.onPause();
 	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		 runTask();
+		super.onResume();
+	}
 
+	private void runTask() {
+		pdialog.setMessage("Downloading and plotting....");
+		pdialog.show();
+		
+		if (kmz != null && url != null) {
+			//Log.d("=====","kmz");
+			new KmzTask(this).execute(url);
+		} else if (url != null) {
+			//Log.d("=====","url");
+			new KmlTask(this).execute(url);
+		}
+	}
 }

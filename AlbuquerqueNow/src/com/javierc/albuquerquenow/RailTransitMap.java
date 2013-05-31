@@ -20,7 +20,6 @@ package com.javierc.albuquerquenow;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import com.javierc.albuquerquenow.R;
 
 public class RailTransitMap extends MapActivity{
 

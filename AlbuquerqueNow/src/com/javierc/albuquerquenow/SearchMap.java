@@ -8,7 +8,6 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.javierc.albuquerquenow.R;
 import com.javierc.albuquerquenow.fetch.JSONFetch;
 
 import java.util.logging.Level;

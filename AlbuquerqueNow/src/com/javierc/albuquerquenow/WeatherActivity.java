@@ -7,7 +7,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
-import com.javierc.albuquerquenow.R;
 import com.javierc.albuquerquenow.WeatherArrayAdapter.ViewHolder;
 import com.javierc.albuquerquenow.fetch.AtmDataFetch;
 import com.javierc.albuquerquenow.hlperobj.AtmData;

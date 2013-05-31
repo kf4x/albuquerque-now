@@ -11,7 +11,6 @@ import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.javierc.albuquerquenow.R;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;

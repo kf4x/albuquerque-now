@@ -3,7 +3,6 @@ package com.javierc.albuquerquenow;
 import android.app.ActionBar;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import com.javierc.albuquerquenow.R;
 
 public class SportMap extends MapActivity implements ActionBar.OnNavigationListener{
 	ActionBar actionBar;
