@@ -13,6 +13,8 @@ public class SportMap extends MapActivity implements ActionBar.OnNavigationListe
 		actionBar = getActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setHomeButtonEnabled(true);
+		actionBar.setIcon(R.drawable.home);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
 		final String[] dropdownValues = getResources().getStringArray(

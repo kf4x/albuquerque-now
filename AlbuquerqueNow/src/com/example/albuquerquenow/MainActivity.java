@@ -12,13 +12,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
 public class MainActivity extends Activity implements iRibbonMenuCallback {
-	private RibbonMenuView rbmView;
 
+	private RibbonMenuView rbmView;
+	private LinearLayout ll;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,7 +35,7 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
         rbmView.setMenuItems(R.menu.ribbon_menu);
         rbmView.setBackgroundResource(R.color.concrete);
         rbmView.getVisibility();
-        
+        ll = (LinearLayout)findViewById(R.id.mainll_mA);
 
 	}
 	
@@ -42,10 +45,9 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		int id = item.getItemId();
-		LinearLayout ll = (LinearLayout)findViewById(R.id.mainll_mA);
 		if (id == android.R.id.home) {
-			ll.setVisibility(ll.getVisibility() == View.GONE ? View.VISIBLE :View.GONE); 
-
+			
+			hideLayout();
 			rbmView.toggleMenu();
 			
 			return true;
@@ -63,8 +65,7 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
 	@Override
 	public void RibbonMenuItemClick(int itemId) {
 		// TODO Auto-generated method stub
-		LinearLayout ll = (LinearLayout)findViewById(R.id.mainll_mA);
-		ll.setVisibility(ll.getVisibility() == View.GONE ? View.VISIBLE :View.GONE); 
+		
 		if(itemId == R.id.ribbon_menu_explore){
 			startActivity(new Intent(getBaseContext(), ExploreActivity.class));
 		}
@@ -80,6 +81,7 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
 		else if(itemId == R.id.ribbon_menu_weather){
 			startActivity(new Intent(getBaseContext(), WeatherActivity.class));
 		}
+		hideLayout();
 	}
 	@Override
 	protected void onDestroy() {
@@ -95,12 +97,14 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
 	}
 
 	public static void trimCache(Context context) {
+		Log.d("trim", "deleted cache");
 	    try {
 	        File dir = new File(Environment.getExternalStorageDirectory() + "/abqnowkml");
 	        if (dir != null && dir.isDirectory()) {
 	            deleteDir(dir);
-
+	            
 	        }
+	        
 	    } catch (Exception e) {
 	        // TODO: handle exception
 	    }
@@ -119,5 +123,14 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
 	    }
 
 	    return dir.delete();
+	}
+	private void hideLayout() {
+		ll.setVisibility(ll.getVisibility() == View.GONE ? View.VISIBLE :View.GONE);
+		if (ll.getVisibility() == View.VISIBLE) {
+			ll.startAnimation(AnimationUtils.loadAnimation(getBaseContext(), R.anim.rbm_in_from_left));
+		}else {
+			ll.startAnimation(AnimationUtils.loadAnimation(getBaseContext(), R.anim.rbm_out_to_left));
+		}
+		
 	}
 }

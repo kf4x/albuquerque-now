@@ -147,6 +147,10 @@ public class KmzTask extends AsyncTask<String, Void, List<Object>>{
 			}
 
     	}
+    	
+    	if ((activity) instanceof ExploreMap) {
+    		((ExploreMap)activity).pdialog.dismiss();
+		}
 
         super.onPostExecute(result);
     }

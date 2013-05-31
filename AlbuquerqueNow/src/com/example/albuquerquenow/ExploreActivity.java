@@ -9,7 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class ExploreActivity extends Activity{
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,7 +49,7 @@ public class ExploreActivity extends Activity{
 					break;
 				case R.id.dogBtn:
 					//url = "http://data.cabq.gov/community/reghistplaces/RegisteredHistoricPlaces.kmz";
-					i.putExtra("kmz", "kmz");
+					i.setClass(getBaseContext(),DogParkMap.class);
 					break;
 				case R.id.publicArtBtn:
 					url = "http://data.cabq.gov/community/art/publicart/PublicArt.kmz";

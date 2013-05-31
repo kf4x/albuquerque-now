@@ -22,7 +22,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 public class RailTransitMap extends MapActivity{
-	//protected boolean useOfflineRoutes = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		useOfflineRoutes = false;
@@ -35,7 +35,7 @@ public class RailTransitMap extends MapActivity{
 		//new AddMapObjsTask(this).execute("http://data.cabq.gov/community/bikepaths/BikePaths.kmz");
 
 //		new AddMapObjsTask(this).execute("http://coagisweb.cabq.gov/arcgis/rest/services/public/InteragencyTrails/MapServer/4/query?where=OBJECTID_1+%3E1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&f=kmz");
-	
+		new KmlTask(this).execute("https://maps.google.com/maps/ms?ie=UTF8&t=m&source=embed&msa=0&output=kml&msid=201876092879256242075.0004c7b592eaf1c192359");
 		super.onCreate(savedInstanceState);
 	}
 	

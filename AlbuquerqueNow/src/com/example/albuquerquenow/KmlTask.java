@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -164,6 +165,10 @@ public class KmlTask extends AsyncTask<String, Void, List<Object>>{
 			}
 
     	}
+    	
+    	if ((activity) instanceof ExploreMap) {
+    		((ExploreMap)activity).pdialog.dismiss();
+		}
 
         super.onPostExecute(result);
     }
