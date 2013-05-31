@@ -4,6 +4,7 @@ package com.javierc.albuquerquenow;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -15,6 +16,8 @@ import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -53,6 +56,14 @@ public class SearchMap extends MapActivity{
 		// TODO Auto-generated method stub
 		if (item.getItemId() == android.R.id.home) {
 			this.finish();
+		} else if (item.getItemId() == R.id.action_legalnotices) {
+			String LicenseInfo = GooglePlayServicesUtil.getOpenSourceSoftwareLicenseInfo(
+					getApplicationContext());
+			AlertDialog.Builder LicenseDialog = new AlertDialog.Builder(SearchMap.this);
+			LicenseDialog.setTitle("Legal Notices");
+			LicenseDialog.setMessage(LicenseInfo);
+			LicenseDialog.show();
+			
 		}
 		return super.onOptionsItemSelected(item);
 	}

@@ -3,12 +3,14 @@ package com.javierc.albuquerquenow;
 
 import java.util.List;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.model.Marker;
 
 
@@ -67,8 +69,14 @@ public class TransitMap extends MapActivity implements ActionBar.OnNavigationLis
 			else{ item.setChecked(true); useOfflineRoutes = true;}
 			
 		} else if (item.getItemId() == R.id.action_legalnotices) {
-			
-			startActivity(new Intent(this, LegalNoticesActivity.class));
+			String LicenseInfo = GooglePlayServicesUtil.getOpenSourceSoftwareLicenseInfo(
+					getApplicationContext());
+			AlertDialog.Builder LicenseDialog = new AlertDialog.Builder(TransitMap.this);
+			LicenseDialog.setTitle("Legal Notices");
+			LicenseDialog.setMessage(LicenseInfo);
+			LicenseDialog.show();
+					
+				
 		} else if (item.getItemId() == R.id.bus_refresh) {
 			//first delete all the current markers
 			refreshMarkers();

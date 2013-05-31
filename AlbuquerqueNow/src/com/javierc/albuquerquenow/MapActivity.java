@@ -20,7 +20,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,7 +50,12 @@ public class MapActivity extends Activity implements LocationListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		if (item.getItemId() == R.id.action_legalnotices) {
-			startActivity(new Intent(this, LegalNoticesActivity.class));
+			String LicenseInfo = GooglePlayServicesUtil.getOpenSourceSoftwareLicenseInfo(
+					getApplicationContext());
+			AlertDialog.Builder LicenseDialog = new AlertDialog.Builder(MapActivity.this);
+			LicenseDialog.setTitle("Legal Notices");
+			LicenseDialog.setMessage(LicenseInfo);
+			LicenseDialog.show();
 		}
 		return super.onOptionsItemSelected(item);
 	}
