@@ -4,17 +4,19 @@ import java.io.File;
 
 import com.darvds.ribbonmenu.RibbonMenuView;
 import com.darvds.ribbonmenu.iRibbonMenuCallback;
-import com.javierc.albuquerquenow.R;
 
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class MainActivity extends Activity implements iRibbonMenuCallback {
@@ -35,9 +37,27 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
         rbmView.setBackgroundResource(R.color.concrete);
         rbmView.getVisibility();
         ll = (LinearLayout)findViewById(R.id.mainll_mA);
-
+		((Button)findViewById(R.id.loadTweets)).setOnClickListener(loadListener());
 	}
 	
+
+
+	private OnClickListener loadListener() {
+		// TODO Auto-generated method stub
+		return new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String info = "This feature is available to beta testers only! Please contact me(About in Menu) if you would like to join.";
+				AlertDialog.Builder LicenseDialog = new AlertDialog.Builder(MainActivity.this);
+				LicenseDialog.setTitle("Comming Soon!");
+				LicenseDialog.setMessage(info);
+				LicenseDialog.show();
+			}
+		};
+	}
+
 
 
 	@Override

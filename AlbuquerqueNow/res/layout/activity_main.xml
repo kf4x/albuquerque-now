@@ -9,36 +9,34 @@
 
 <LinearLayout 
 	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content" 
+	    android:layout_height="fill_parent" 
 	    android:orientation="vertical"
 		android:paddingTop="30sp"
 		android:paddingBottom="10sp"
-        android:background="#ffc53d"
+        android:gravity="center"
         android:id="@+id/mainll_mA" >
 	    <TextView
 	        android:id="@+id/title"
-	        android:textSize="70sp"
+	        android:textSize="20sp"
 	        android:gravity="center"
 		    android:padding="2dp"
-		    android:shadowColor="@android:color/white"
+		    android:shadowColor="@color/f_yellow"
 		    android:textColor="#80a6ff"
 		    android:shadowDx="1"
 		    android:shadowDy="1"
 		    android:shadowRadius="0.6"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:background="#ffc53d"
-	        android:text="Care to read?" />
-	    <TextView
-	        android:id="@+id/helper_swip"
-		    android:paddingLeft="@dimen/activity_horizontal_margin"
-		    android:paddingRight="@dimen/activity_horizontal_margin"
-	        android:textSize="15sp"
-	        android:gravity="center"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:text="swipe DOWN to see answer" />
+	        android:text="Load news from the community?" />
 
+		<Button 
+		    android:id="@+id/loadTweets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Load"
+            android:gravity="center"
+            android:background="@color/f_blue"
+            style="@style/ButtonText" />
 </LinearLayout>
 
 
