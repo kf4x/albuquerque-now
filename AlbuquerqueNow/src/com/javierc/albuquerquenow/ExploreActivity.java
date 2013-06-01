@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class ExploreActivity extends Activity{
 	
@@ -22,7 +23,8 @@ public class ExploreActivity extends Activity{
 		((Button)findViewById(R.id.publicArtBtn)).setOnClickListener(exploreBtn());
 		((Button)findViewById(R.id.sportBtn)).setOnClickListener(exploreBtn());
 		((Button)findViewById(R.id.bbBtn)).setOnClickListener(exploreBtn());
-		((Button)findViewById(R.id.bbBtn)).setOnClickListener(exploreBtn());
+		((Button)findViewById(R.id.wifi)).setOnClickListener(exploreBtn());
+		((Button)findViewById(R.id.bike)).setOnClickListener(exploreBtn());
 		
 
 	}	
@@ -39,6 +41,7 @@ public class ExploreActivity extends Activity{
 		return new OnClickListener() {
 			Intent i=new Intent(getBaseContext(),ExploreMap.class);
 			String url = "";
+			boolean t= true;
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -58,12 +61,24 @@ public class ExploreActivity extends Activity{
 				case R.id.sportBtn:
 					i.setClass(getBaseContext(),SportMap.class);
 					break;
-
+				case R.id.wifi:
+					t=false;
+//					i.setClass(getBaseContext(), WifiMap.class);
+					Toast.makeText(getBaseContext(), "A new feature!", Toast.LENGTH_SHORT).show();
+					break;
+				case R.id.bike:
+					t=false;
+//					i.setClass(getBaseContext(), WifiMap.class);
+					Toast.makeText(getBaseContext(), "A new feature!", Toast.LENGTH_SHORT).show();
+					break;
 				default:
 					break;
 				}
-				i.putExtra("url", url);
-				startActivity(i);
+				if (t) {
+					i.putExtra("url", url);
+					startActivity(i);
+				}
+				
 			}
 		};
 	}

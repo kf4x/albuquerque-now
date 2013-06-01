@@ -106,12 +106,21 @@ public class WifiParseCSV {
 			String[] row;
 			double[] ll = new double[2];
 			line  = in.nextLine();
-
-			row = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-			
+			int commaLoc = 0; 
+			String subline ="";
 			try {
-				double lng = Double.parseDouble(row[5]);
-				double lat = Double.parseDouble(row[6]);
+				commaLoc = line.lastIndexOf(',');
+				subline = line.substring(0, commaLoc);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			System.out.println(commaLoc);
+			row = subline.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+			System.out.println(row);
+			try {
+				double lng = Double.parseDouble(row[3]);
+				double lat = Double.parseDouble(row[4]);
 				//this order is same order as LatLng object;
 				ll[0] = lat;
 				ll[1] = lng;
@@ -122,16 +131,17 @@ public class WifiParseCSV {
 				ll[1] = 0.0;
 			}
 			data.add(new WifiSpot()
-					.set_name(row[1])
-					.set_address(row[2])
-					.set_ssid(row[3])
+					.set_name(row[0])
+					.set_address(row[1])
+					.set_ssid(row[2])
 					.set_ll(ll)
+					.set_website("")
 					);
 			
 		}
 		
 		//quick fix!!
-		data.remove(0);
+		//data.remove(0);
 		Log.i("Removing", "Removed first element");
 		
 		return data;

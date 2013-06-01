@@ -171,7 +171,7 @@ public class ParkParseCSV {
 		}
 		
 		//quick fix!!
-		data.remove(0);
+		//data.remove(0);
 		Log.i("Removing", "Removed first element");
 		
 		return data;

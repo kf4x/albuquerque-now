@@ -99,7 +99,7 @@
 	        android:textColor="@color/white"	
 	        android:textStyle="bold"        
 	        android:padding="8dp"
-	        android:text="Wifi locations" />
+	        android:text="Comming Soon!" />
 	
 	    <Button android:id="@+id/bike" 
 	        android:layout_width="fill_parent"
@@ -112,6 +112,6 @@
 	        android:textColor="@color/white"	
 	        android:textStyle="bold"        
 	        android:padding="8dp"
-	        android:text="Bicycling map" />
+	        android:text="Comming Soon!" />
 	</LinearLayout>
 </LinearLayout>
