@@ -80,6 +80,9 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
 		else if(itemId == R.id.ribbon_menu_weather){
 			startActivity(new Intent(getBaseContext(), WeatherActivity.class));
 		}
+		else if(itemId == R.id.ribbon_menu_about){
+			startActivity(new Intent(getBaseContext(), AboutActivity.class));
+		}
 		hideLayout();
 	}
 	@Override

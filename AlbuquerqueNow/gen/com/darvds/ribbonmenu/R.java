@@ -8,10 +8,10 @@ package com.darvds.ribbonmenu;
 
 public final class R {
 	public static final class id {
-		public static final int rbm_item_icon = 0x7f05001f;
-		public static final int rbm_outside_view = 0x7f050022;
-		public static final int rbm_item_text = 0x7f050020;
-		public static final int rbm_listview = 0x7f050021;
+		public static final int rbm_item_icon = 0x7f050022;
+		public static final int rbm_outside_view = 0x7f050025;
+		public static final int rbm_item_text = 0x7f050023;
+		public static final int rbm_listview = 0x7f050024;
 	}
 	public static final class anim {
 		public static final int rbm_out_to_left = 0x7f040001;
@@ -22,8 +22,8 @@ public final class R {
 		public static final int rbm_item_text_color = 0x7f070001;
 	}
 	public static final class layout {
-		public static final int rbm_menu = 0x7f03000c;
-		public static final int rbm_item = 0x7f03000b;
+		public static final int rbm_menu = 0x7f03000d;
+		public static final int rbm_item = 0x7f03000c;
 	}
 	public static final class dimen {
 		public static final int rbm_item_image_width = 0x7f080004;
