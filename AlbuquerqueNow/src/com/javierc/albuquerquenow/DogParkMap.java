@@ -13,6 +13,7 @@ import com.javierc.albuquerquenow.util.ParkParseCSV.DogPark;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 public class DogParkMap extends MapActivity{
@@ -22,11 +23,18 @@ public class DogParkMap extends MapActivity{
 		// TODO Auto-generated method stub
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setDisplayShowTitleEnabled(false);
-		getActionBar().setIcon(R.drawable.home);
+		getActionBar().setIcon(R.drawable.arrow_left);
 		new AddParksTask(this).execute("http://www.cabq.gov/parksandrecreation/documents/Dog%20Park%20Map%20Plone.csv");
 		super.onCreate(savedInstanceState);
 	}
-	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub		
+		if (item.getItemId() == android.R.id.home) {
+			this.finish();
+		} 
+		return super.onOptionsItemSelected(item);
+	}
 	class AddParksTask extends AsyncTask<String, Void, List<MarkerOptions>>{
 		
 	    private Activity activity;

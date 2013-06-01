@@ -2,6 +2,7 @@ package com.javierc.albuquerquenow;
 
 import android.app.ActionBar;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
 public class SportMap extends MapActivity implements ActionBar.OnNavigationListener{
@@ -31,6 +32,14 @@ public class SportMap extends MapActivity implements ActionBar.OnNavigationListe
 		// Set up the dropdown list navigation in the action bar.
 		actionBar.setListNavigationCallbacks(adapter, this);
 		super.onCreate(savedInstanceState);
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub		
+		if (item.getItemId() == android.R.id.home) {
+			this.finish();
+		} 
+		return super.onOptionsItemSelected(item);
 	}
 	@Override
 	public boolean onNavigationItemSelected(int arg0, long arg1) {

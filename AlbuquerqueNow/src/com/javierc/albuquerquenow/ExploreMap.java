@@ -5,6 +5,7 @@ package com.javierc.albuquerquenow;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class ExploreMap extends MapActivity {
 	ProgressDialog pdialog;
@@ -13,7 +14,7 @@ public class ExploreMap extends MapActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setDisplayShowTitleEnabled(false);
-		getActionBar().setIcon(R.drawable.home);
+		getActionBar().setIcon(R.drawable.arrow_left);
 		
 		Bundle extras = getIntent().getExtras();
 		useOfflineRoutes = false;
@@ -37,7 +38,14 @@ public class ExploreMap extends MapActivity {
 		getMenuInflater().inflate(R.menu.explore_map, menu);
 		return true;
 	}
-	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		if (item.getItemId() == android.R.id.home) {
+			this.finish();
+		} 
+		return super.onOptionsItemSelected(item);
+	}
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
