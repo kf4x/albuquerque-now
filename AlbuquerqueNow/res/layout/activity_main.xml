@@ -6,15 +6,21 @@
         android:id="@+id/ribbonMenuView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
+<LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent" 
+	    android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/mainll_mA"
+    >
 <LinearLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent" 
 	    android:orientation="vertical"
 		android:paddingTop="30sp"
 		android:paddingBottom="10sp"
-        android:gravity="center"
-        android:id="@+id/mainll_mA" >
+        android:gravity="center" 
+        android:id="@+id/load_ll">
 	    <TextView
 	        android:id="@+id/title"
 	        android:textSize="20sp"
@@ -38,7 +44,30 @@
             android:background="@color/f_blue"
             style="@style/ButtonText" />
 </LinearLayout>
+	<LinearLayout 
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:visibility="gone"
+	    android:id="@+id/listLayout"
+	    >
+		
+		
+		<ProgressBar 
+			android:id="@+id/progress_lv"	
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal" 
+			android:visibility="gone"
+		/>
+		
+		<ListView 
+			android:id="@+id/list"
+			android:layout_width="fill_parent"
+	    	android:layout_height="fill_parent"
+		/>
+		
+	</LinearLayout>
 
-
-
+</LinearLayout>
 </FrameLayout>
