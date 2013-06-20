@@ -90,7 +90,11 @@ public class DogParkMap extends MapActivity{
 			
 			super.onPostExecute(result);
 		}
-		
-		
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		new AddParksTask(this).execute("http://www.cabq.gov/parksandrecreation/documents/Dog%20Park%20Map%20Plone.csv");
+		super.onResume();
 	}
 }

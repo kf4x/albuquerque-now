@@ -36,8 +36,11 @@
         android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDL-q-7iGvlXpUL4iiJssfIxQsGkSfKuK8" />
-
+            android:value="AIzaSyC6IKjaTA3GGDoeJSFEgj_9_YXCwgwPXco" />
+        <!--
+        debug AIzaSyC6IKjaTA3GGDoeJSFEgj_9_YXCwgwPXco
+        final AIzaSyDL-q-7iGvlXpUL4iiJssfIxQsGkSfKuK8
+         -->
         <activity
             android:name="com.javierc.albuquerquenow.MainActivity"
             android:label="Menu" >
