@@ -232,9 +232,10 @@ containing a value of this type.
         public static final int list_focused_stylingactionbar=0x7f020027;
         public static final int location=0x7f020028;
         public static final int move=0x7f020029;
-        public static final int refresh=0x7f02002a;
-        public static final int traffic_lights_pyramid=0x7f02002b;
-        public static final int zoom=0x7f02002c;
+        public static final int operator2=0x7f02002a;
+        public static final int refresh=0x7f02002b;
+        public static final int traffic_lights_pyramid=0x7f02002c;
+        public static final int zoom=0x7f02002d;
     }
     public static final class id {
         public static final int about_readings=0x7f06003f;

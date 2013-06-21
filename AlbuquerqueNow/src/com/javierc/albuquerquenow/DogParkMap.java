@@ -60,10 +60,16 @@ public class DogParkMap extends MapActivity{
 			try {
 				for (int i = 0; i < parks.size(); i++) {
 					 MarkerOptions markOptions = new MarkerOptions();
-					 double lat = ((DogPark)parks.get(i)).get_ll()[0];
-					 double lng = ((DogPark)parks.get(i)).get_ll()[1];
-					 markOptions.title(((DogPark)parks.get(i)).get_name());
-					 markOptions.snippet(((DogPark)parks.get(i)).toString());
+					 DogPark dp = (DogPark)parks.get(i);
+					 double lat = dp.get_ll()[0];
+					 double lng = dp.get_ll()[1];
+					 markOptions.title(dp.get_name());
+					 markOptions.snippet(
+							 "<html><body><b>Name: </b>"+ dp.get_name() 
+							 +"<br><b>Address: </b>"+ dp.get_address()
+							 +"<br><b>Hours: </b>"+ dp.get_hours()
+							 +"<br><b>Note: </b>"+ dp.get_notes()
+							 +"</body></html>");
 					 markOptions.position(new LatLng(lat, lng));
 					 markerOptsList.add(markOptions);
 				}

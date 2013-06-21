@@ -93,9 +93,10 @@ int drawable ic_launcher 0x7f020026
 int drawable list_focused_stylingactionbar 0x7f020027
 int drawable location 0x7f020028
 int drawable move 0x7f020029
-int drawable refresh 0x7f02002a
-int drawable traffic_lights_pyramid 0x7f02002b
-int drawable zoom 0x7f02002c
+int drawable operator2 0x7f02002a
+int drawable refresh 0x7f02002b
+int drawable traffic_lights_pyramid 0x7f02002c
+int drawable zoom 0x7f02002d
 int id about_readings 0x7f06003f
 int id action_legalnotices 0x7f060034
 int id action_settings 0x7f060033
