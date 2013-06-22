@@ -2,16 +2,10 @@ package com.javierc.albuquerquenow;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.javierc.albuquerquenow.fetch.JSONFetch;
-
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +19,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Toast;
+
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.javierc.albuquerquenow.fetch.JSONFetch;
+import com.javierc.albuquerquenow.hlperobj.VenueData;
 
 public class SearchMap extends MapActivity{
     
@@ -102,32 +103,15 @@ public class SearchMap extends MapActivity{
 			
 		};
 	}
-    protected void addToMap(ArrayList<HashMap<String, String>> venueMap) {
-        googlemap.clear();
 
-        LatLng pos = null;
-            for (int i = 0; i < venueMap.size(); i++) {
-                String lat = venueMap.get(i).get("lat");
-                String lng = venueMap.get(i).get("lng");
-                try {
-                    pos = new LatLng(Double.valueOf(lat), Double.valueOf(lng));
-                } catch (Exception e) {
-                }
-                googlemap.addMarker(new MarkerOptions()
-                        .title(venueMap.get(i).get("name").toString())
-                        .snippet(venueMap.get(i).get("here").toString())
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                        .position(pos)
-                        );
-            }
-    }
-    private class SearchFoursquare extends AsyncTask<String, Void, Void>{
+    private class SearchFoursquare extends AsyncTask<String, Void, List <VenueData>>{
         private JSONObject json;
         private JSONObject response;
         private JSONArray venues;
-        private ArrayList<HashMap<String, String>> venueMap = new ArrayList<HashMap<String, String>>();
+       
         @Override
-        protected Void doInBackground(String... params) {
+        protected List <VenueData> doInBackground(String... params) {
+        	List <VenueData> data = new ArrayList<VenueData>();
             if (params[2].contains(" ")) {
                 params[2] = params[2].replace(" ", "+");
             }
@@ -136,27 +120,24 @@ public class SearchMap extends MapActivity{
 
                 response = json.getJSONObject("response");
                 venues = response.getJSONArray("venues");
-                venueMap.clear();
+
                 for (int i = 0; i < venues.length(); i++) {
                     JSONObject v = venues.getJSONObject(i);
 
-                    String name = v.getString("name");
+                    String name = v.optString("name");
 
                     JSONObject loc = v.getJSONObject("location");
                     String lat = loc.getString("lat");
                     String lng = loc.getString("lng");
 
                     JSONObject here = v.getJSONObject("hereNow");
-                    String count = here.getString("count");
+                    JSONObject stats = v.getJSONObject("stats");
+                    String statsCount = stats.optString("checkinsCount");
+                    String website = v.optString("url","");
+                    String count = here.optString("count");
 
-                    HashMap<String, String> map = new HashMap<String, String>();
-
-                    map.put("name", name);
-                    map.put("lat", lat);
-                    map.put("lng", lng);
-                    map.put("here", count);
-
-                    venueMap.add(map);
+                    
+                    data.add(new VenueData(name, website, Double.parseDouble(lat), Double.parseDouble(lng), Integer.parseInt(count), Long.parseLong(statsCount)));
 
                 }
             } catch (JSONException ex) {
@@ -164,13 +145,27 @@ public class SearchMap extends MapActivity{
             } catch (Exception e) {
 				// TODO: handle exception
 			}
-            return null;
+            return data;
         }
 
         @Override
-        protected void onPostExecute(Void result) {
-        	if (venueMap.size() > 0) {
-                addToMap(venueMap);
+        protected void onPostExecute(List <VenueData> result) {
+        	googlemap.clear();
+        	if (result.size() > 0) {
+                for (int i = 0; i < result.size(); i++) {
+                	VenueData v = result.get(i);
+                	
+                    googlemap.addMarker(new MarkerOptions()
+	                    .title(v.get_name())
+	                    .snippet( "<html><body><b>Name: </b>"+ v.get_name()
+								 +"<br><b>Currently checked in: </b>"+ v.get_here()
+								 +"<br><b>Total checkins: </b>"+ v.get_total()
+								 +"<br><b>Total checkins: </b>"+ "<a href=\"" + v.get_website() + "\">Visit</a>"
+								 +"</body></html>")
+	                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+	                    .position(new LatLng(v.get_lat(), v.get_lng()))
+	                    );
+				}
 			} else {
 				Toast.makeText(getBaseContext(), "Sorry nothing matched", Toast.LENGTH_SHORT).show();
 			}
