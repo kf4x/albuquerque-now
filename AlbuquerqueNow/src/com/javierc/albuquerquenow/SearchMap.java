@@ -160,7 +160,7 @@ public class SearchMap extends MapActivity{
 	                    .snippet( "<html><body><b>Name: </b>"+ v.get_name()
 								 +"<br><b>Currently checked in: </b>"+ v.get_here()
 								 +"<br><b>Total checkins: </b>"+ v.get_total()
-								 +"<br><b>Total checkins: </b>"+ "<a href=\"" + v.get_website() + "\">Visit</a>"
+								 +"<br><b>Website: </b>"+ "<a href=\"" + v.get_website() + "\">Visit</a>"
 								 +"</body></html>")
 	                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
 	                    .position(new LatLng(v.get_lat(), v.get_lng()))

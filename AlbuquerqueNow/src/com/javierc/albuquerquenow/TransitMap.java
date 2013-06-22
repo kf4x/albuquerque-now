@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
 
@@ -156,4 +157,22 @@ public class TransitMap extends MapActivity implements ActionBar.OnNavigationLis
     	}
     	return false;
 	}
+    
+    private double distance(LatLng c, LatLng o){
+        final int R = 6371;
+
+        Double latDistance = Math.toRadians(o.latitude-c.latitude);
+        Double lonDistance = Math.toRadians(o.longitude-c.longitude);
+        Double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2) +
+                   Math.cos(Math.toRadians(c.latitude)) * Math.cos(Math.toRadians(o.latitude)) *
+                   Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        Double cv = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        Double distance = R * cv;
+         
+        return distance;
+    }
+    
+    private boolean isInsideArea(LatLng c, LatLng o, double r ){
+    	return distance(c, o) <= r;
+    }
 }
