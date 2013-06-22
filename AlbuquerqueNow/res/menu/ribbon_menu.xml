@@ -6,5 +6,6 @@
     <item android:id="@+id/ribbon_menu_rrtransit" android:title="Rail Transit" android:icon="@drawable/traffic_lights_pyramid"></item>
     <item android:id="@+id/ribbon_menu_search" android:title="Find a place" android:icon="@drawable/zoom"></item>
     <item android:id="@+id/ribbon_menu_weather" android:title="Air Info" android:icon="@drawable/cloud"></item>
+    <item android:id="@+id/ribbon_menu_fires" android:title="Fires" android:icon="@drawable/operator2"></item>
     <item android:id="@+id/ribbon_menu_about" android:title="About" android:icon="@drawable/help"></item>
 </menu>

@@ -210,6 +210,9 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
 		else if(itemId == R.id.ribbon_menu_about){
 			startActivity(new Intent(getBaseContext(), AboutActivity.class));
 		}
+		else if(itemId == R.id.ribbon_menu_fires){
+			startActivity(new Intent(getBaseContext(), FireActivity.class));
+		}
 		hideLayout();
 	}
 	@Override
