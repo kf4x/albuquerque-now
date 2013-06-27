@@ -239,16 +239,17 @@ containing a value of this type.
         public static final int zoom=0x7f02002e;
     }
     public static final class id {
-        public static final int about_readings=0x7f060040;
+        public static final int about_readings=0x7f060041;
         public static final int action_legalnotices=0x7f060034;
         public static final int action_settings=0x7f060033;
         public static final int bbBtn=0x7f06000b;
         public static final int bike=0x7f06000e;
-        public static final int bus_refresh=0x7f06003f;
+        public static final int bus_refresh=0x7f060040;
+        public static final int bus_stops=0x7f06003f;
         public static final int cabqBtn=0x7f060006;
-        public static final int camera=0x7f060028;
-        public static final int category=0x7f060020;
-        public static final int code=0x7f06001e;
+        public static final int camera=0x7f060015;
+        public static final int category=0x7f060021;
+        public static final int code=0x7f06001f;
         public static final int contact_me=0x7f060005;
         public static final int dogBtn=0x7f06000a;
         public static final int dummy_button=0x7f060011;
@@ -256,17 +257,18 @@ containing a value of this type.
         public static final int fullscreen_content_controls=0x7f060010;
         public static final int header=0x7f060031;
         public static final int hybrid=0x7f060004;
+        public static final int images=0x7f060028;
         public static final int importance_lbl=0x7f06002d;
         public static final int its_tripBtn=0x7f060007;
-        public static final int l_map=0x7f06001a;
+        public static final int l_map=0x7f06001b;
         public static final int label=0x7f06002e;
-        public static final int list=0x7f060019;
-        public static final int listLayout=0x7f060017;
-        public static final int loadTweets=0x7f060016;
+        public static final int list=0x7f06001a;
+        public static final int listLayout=0x7f060018;
+        public static final int loadTweets=0x7f060017;
         public static final int load_ll=0x7f060014;
         public static final int mainll=0x7f060008;
         public static final int mainll_mA=0x7f060013;
-        public static final int map=0x7f06001b;
+        public static final int map=0x7f06001c;
         public static final int marker_title=0x7f060027;
         public static final int menu_search=0x7f06003d;
         public static final int meta=0x7f060026;
@@ -274,12 +276,12 @@ containing a value of this type.
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
         public static final int offline_routes=0x7f06003e;
-        public static final int pollut=0x7f060021;
-        public static final int pollut_level=0x7f060022;
-        public static final int progress=0x7f060023;
-        public static final int progress_indic=0x7f06001d;
-        public static final int progress_indic_layout=0x7f06001c;
-        public static final int progress_lv=0x7f060018;
+        public static final int pollut=0x7f060022;
+        public static final int pollut_level=0x7f060023;
+        public static final int progress=0x7f060024;
+        public static final int progress_indic=0x7f06001e;
+        public static final int progress_indic_layout=0x7f06001d;
+        public static final int progress_lv=0x7f060019;
         public static final int publicArtBtn=0x7f06000c;
         public static final int rbm_item_icon=0x7f060029;
         public static final int rbm_item_text=0x7f06002a;
@@ -297,11 +299,10 @@ containing a value of this type.
         public static final int satellite=0x7f060002;
         public static final int searchBox=0x7f060032;
         public static final int sportBtn=0x7f060009;
-        public static final int tb=0x7f060024;
         public static final int terrain=0x7f060003;
-        public static final int title=0x7f060015;
+        public static final int title=0x7f060016;
         public static final int type=0x7f06002f;
-        public static final int warn=0x7f06001f;
+        public static final int warn=0x7f060020;
         public static final int webview=0x7f060030;
         public static final int wifi=0x7f06000d;
     }
@@ -319,11 +320,12 @@ containing a value of this type.
         public static final int content_item_s=0x7f03000a;
         public static final int cust_marker_info=0x7f03000b;
         public static final int header=0x7f03000c;
-        public static final int rbm_item=0x7f03000d;
-        public static final int rbm_menu=0x7f03000e;
-        public static final int rowlayout=0x7f03000f;
-        public static final int webviewdialog=0x7f030010;
-        public static final int window_search=0x7f030011;
+        public static final int main_header=0x7f03000d;
+        public static final int rbm_item=0x7f03000e;
+        public static final int rbm_menu=0x7f03000f;
+        public static final int rowlayout=0x7f030010;
+        public static final int webviewdialog=0x7f030011;
+        public static final int window_search=0x7f030012;
     }
     public static final class menu {
         public static final int about=0x7f0b0000;

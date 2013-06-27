@@ -38,7 +38,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class WeatherActivity extends ListActivity {
-	ImageView liveCam;
+	
 	LinearLayout progressLayout;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +72,7 @@ public class WeatherActivity extends ListActivity {
 		
 		lv.setOnItemClickListener(itemClick());
 		
-		liveCam = (ImageView)  findViewById(R.id.camera);
-		liveCam.setTag("http://wwc.instacam.com/instacamimg/KOBTV/KOBTV_s.jpg");
+
 
 
 	}
@@ -195,65 +194,7 @@ public class WeatherActivity extends ListActivity {
 		
 	}
 	
-	private class DownloadImageTask extends AsyncTask<ImageView, Void, Bitmap> {
 
-		ImageView imageView = null;
-
-		@Override
-		protected Bitmap doInBackground(ImageView... imageViews) {
-		    this.imageView = imageViews[0];
-		    return download_Image((String)imageView.getTag());
-
-		}
-
-		@Override
-		protected void onPostExecute(Bitmap result) {
-			//Bitmap bitmap = result;
-			if(result == null){
-				result = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-				imageView.setImageBitmap(result);
-			}
-			else{
-				Bitmap circleBitmap = Bitmap.createBitmap(result.getWidth(), result.getHeight(), Bitmap.Config.ARGB_8888);
-	
-				BitmapShader shader = new BitmapShader (result,  TileMode.CLAMP, TileMode.CLAMP);
-				Paint paint = new Paint();
-				paint.setAntiAlias(true);
-		        paint.setShader(shader);
-		        
-//		        int center = circleBitmap.getWidth()/2;
-//		        imageView.getDrawable().getBounds().width()/2
-//		        imageView.getDrawable().getBounds().height()/2
-		        Canvas c = new Canvas(circleBitmap);
-
-			    imageView.setImageBitmap(circleBitmap);
-			    c.drawCircle(imageView.getDrawable().getBounds().width()/2, imageView.getDrawable().getBounds().height()/2, imageView.getDrawable().getBounds().height()/2, paint);
-
-			} 
-
-		}
-
-
-		private Bitmap download_Image(String url) {
-		  Bitmap bm = null;
-		    try {
-		        URL aURL = new URL(url);
-		        URLConnection conn = aURL.openConnection();
-		        conn.connect();
-		        InputStream is = conn.getInputStream();
-		        BufferedInputStream bis = new BufferedInputStream(is);
-		        bm = BitmapFactory.decodeStream(bis);
-		        bis.close();
-		        is.close();
-		    } catch (IOException e) {
-
-		        Log.e("ERRRR","IO: " + e.getMessage().toString());
-		    } catch (Exception e) {
-				// TODO: handle exception
-			}
-		    return bm;  
-		}
-	}
 	
 	@Override
 	protected void onPause() {
@@ -266,7 +207,7 @@ public class WeatherActivity extends ListActivity {
 		// TODO Auto-generated method stub
 		new FetchDataAsync(this).execute();
 		
-		new DownloadImageTask().execute(liveCam); //must be called after fetching data
+		
 		
 		super.onResume();
 	}

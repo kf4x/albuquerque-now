@@ -158,7 +158,9 @@ public class ParkParseCSV {
 				ll[0] = 0.0;
 				ll[1] = 0.0;
 			}
-			data.add(new DogPark()
+			Log.i("Row", row[3]);
+			try {
+				data.add(new DogPark()
 					.set_name(row[1])
 					.set_address(row[2])
 					.set_notes(row[3])
@@ -166,7 +168,11 @@ public class ParkParseCSV {
 					.set_ll(ll)
 					.set_hours(row[7])
 					.set_isWater(row[8].toLowerCase() == "yes")
-					);
+					);				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
 			
 		}
 		

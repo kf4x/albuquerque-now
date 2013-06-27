@@ -31,7 +31,7 @@ public final class R {
 		public static final int rbm_outside_view = 0x7f06002c;
 	}
 	public static final class layout {
-		public static final int rbm_item = 0x7f03000d;
-		public static final int rbm_menu = 0x7f03000e;
+		public static final int rbm_item = 0x7f03000e;
+		public static final int rbm_menu = 0x7f03000f;
 	}
 }

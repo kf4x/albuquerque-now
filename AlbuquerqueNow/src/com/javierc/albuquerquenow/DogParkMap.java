@@ -20,12 +20,13 @@ public class DogParkMap extends MapActivity{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		// TODO Auto-generated method stub
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setDisplayShowTitleEnabled(false);
 		getActionBar().setIcon(R.drawable.arrow_left);
-		new AddParksTask(this).execute("http://www.cabq.gov/parksandrecreation/documents/Dog%20Park%20Map%20Plone.csv");
-		super.onCreate(savedInstanceState);
+//		new AddParksTask(this).execute("http://www.cabq.gov/parksandrecreation/documents/Dog%20Park%20Map%20Plone.csv");
+		
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

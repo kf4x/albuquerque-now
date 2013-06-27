@@ -1,9 +1,15 @@
 package com.javierc.albuquerquenow;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -11,16 +17,24 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.androidquery.AQuery;
+import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.darvds.ribbonmenu.RibbonMenuView;
 import com.darvds.ribbonmenu.iRibbonMenuCallback;
 
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Shader.TileMode;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View.OnClickListener;
@@ -29,11 +43,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements iRibbonMenuCallback {
-
+	ImageView liveCam;
 	private RibbonMenuView rbmView;
 	private LinearLayout ll;
 	private LinearLayout loadLL;
@@ -57,7 +73,9 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
         loadLL = (LinearLayout)findViewById(R.id.load_ll);
 		((Button)findViewById(R.id.loadTweets)).setOnClickListener(loadListener());
 		
-			
+		liveCam = (ImageView)  findViewById(R.id.camera);
+		liveCam.setTag("http://wwc.instacam.com/instacamimg/KOBTV/KOBTV_s.jpg");
+		
 	}
 	
 
@@ -72,26 +90,26 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
 				LinearLayout l = (LinearLayout)findViewById(R.id.listLayout);
 				l.setVisibility(View.VISIBLE);
 				loadLL.setVisibility(View.GONE);
-				loadTweets();
+				loadNews();
+				
 			}
 
 
 		};
 	}
-
-
-	private void loadTweets() {
+	private void loadNews() {
 		// TODO Auto-generated method stub
-		String url = "https://search.twitter.com/search.json?q=%23abq&rpp=5&include_entities=false&result_type=mixed";
+		String url = "http://www.google.com/uds/GnewsSearch?q=albuquerque&v=1.0";
         aq.progress(R.id.progress_lv).ajax(url, JSONObject.class,this, "renderNews");
         
 	}
+
 	
 	
 	private void addItems(JSONArray ja, List<JSONObject> items){
 		for(int i = 0 ; i < ja.length(); i++){
 			JSONObject jo = ja.optJSONObject(i);
-			if(jo.has("profile_image_url")){
+			if(jo.has("content")){
 				items.add(jo);
 			}
 		}
@@ -101,8 +119,10 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
 	public void renderNews(String url, JSONObject json, AjaxStatus status) {
 		
 		if(json == null) return;
+		JSONObject jo = json.optJSONObject("responseData");
+		JSONArray ja = jo.optJSONArray("results");
+//		Log.i("pub", ja.toString());
 		
-		JSONArray ja = json.optJSONArray("results");
 		if(ja == null) return;
 		
 		List<JSONObject> items = new ArrayList<JSONObject>();
@@ -123,12 +143,13 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
 				JSONObject jo = getItem(position);
 				
 				AQuery aq = listAq.recycle(convertView);
-				aq.id(R.id.name).text(jo.optString("text", "No Title"));
-				aq.id(R.id.meta).text("@" + jo.optString("from_user", ""));
+				aq.id(R.id.name).text(jo.optString("title", "No Title"));
+				aq.id(R.id.meta).text(jo.optString("publisher", ""));
+				Log.i("pub", jo.optString("publisher", ""));
 				
-				String tb = jo.optString("profile_image_url");
+//				String tb = jo.optString("profile_image_url");
 
-				aq.id(R.id.tb).progress(R.id.progress).image(tb, true, true, 0, 0, null, AQuery.FADE_IN_NETWORK, 1.0f);
+//				aq.id(R.id.tb).progress(R.id.progress).image(tb, true, true, 0, 0, null, AQuery.FADE_IN_NETWORK, 1.0f);
 				
 				
 				return convertView;
@@ -152,10 +173,8 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
 					long arg3) {
 
 	            JSONObject jo = (JSONObject) arg0.getItemAtPosition(arg2);
-	            String user = jo.optString("from_user");
-	            String statID = jo.optString("id_str");
+	            String url = jo.optString("signedRedirectUrl");
 
-	            String url = "https://twitter.com/" + user + "/status/" + statID;
 	            Intent i = new Intent(Intent.ACTION_VIEW);
 	            i.setData(Uri.parse(url));
 	            startActivity(i);
@@ -183,10 +202,7 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
 		}
 
 	}
-	
-	
-	
-	
+
 
 	@Override
 	public void RibbonMenuItemClick(int itemId) {
@@ -228,7 +244,7 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
 		super.onPause();
 	}
 
-	public static void trimCache(Context context) {
+	private static void trimCache(Context context) {
 		Log.d("trim", "deleted cache");
 	    try {
 	        File dir = new File(Environment.getExternalStorageDirectory() + "/abqnowkml");
@@ -243,7 +259,7 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
 	}
 
 
-	public static boolean deleteDir(File dir) {
+	private static boolean deleteDir(File dir) {
 	    if (dir != null && dir.isDirectory()) {
 	        String[] children = dir.list();
 	        for (int i = 0; i < children.length; i++) {
@@ -264,5 +280,74 @@ public class MainActivity extends Activity implements iRibbonMenuCallback {
 			ll.startAnimation(AnimationUtils.loadAnimation(getBaseContext(), R.anim.rbm_out_to_left));
 		}
 		
+	}
+	
+	private class DownloadImageTask extends AsyncTask<ImageView, Void, Bitmap> {
+
+		ImageView imageView = null;
+
+		@Override
+		protected Bitmap doInBackground(ImageView... imageViews) {
+		    this.imageView = imageViews[0];
+		    return download_Image((String)imageView.getTag());
+
+		}
+
+		@Override
+		protected void onPostExecute(Bitmap result) {
+			//Bitmap bitmap = result;
+			if(result == null){
+				result = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+				imageView.setImageBitmap(result);
+
+			}
+			else{
+				Bitmap circleBitmap = Bitmap.createBitmap(result.getWidth(), result.getHeight(), Bitmap.Config.ARGB_8888);
+	
+				BitmapShader shader = new BitmapShader (result,  TileMode.CLAMP, TileMode.CLAMP);
+				Paint paint = new Paint();
+				paint.setAntiAlias(true);
+		        paint.setShader(shader);
+		        
+//		        int center = circleBitmap.getWidth()/2;
+//		        imageView.getDrawable().getBounds().width()/2
+//		        imageView.getDrawable().getBounds().height()/2
+		        Canvas c = new Canvas(circleBitmap);
+
+			    imageView.setImageBitmap(circleBitmap);
+			    c.drawCircle(imageView.getDrawable().getBounds().width()/2, imageView.getDrawable().getBounds().height()/2, imageView.getDrawable().getBounds().height()/2, paint);
+			} 
+
+		}
+
+
+		private Bitmap download_Image(String url) {
+		  Bitmap bm = null;
+		    try {
+		        URL aURL = new URL(url);
+		        URLConnection conn = aURL.openConnection();
+		        conn.connect();
+		        InputStream is = conn.getInputStream();
+		        BufferedInputStream bis = new BufferedInputStream(is);
+		        bm = BitmapFactory.decodeStream(bis);
+		        bis.close();
+		        is.close();
+		    } catch (IOException e) {
+
+		        Log.e("ERRRR","IO: " + e.getMessage().toString());
+		    } catch (Exception e) {
+				// TODO: handle exception
+			}
+		    return bm;  
+		}
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		if (ll.getVisibility() == View.VISIBLE) {
+			new DownloadImageTask().execute(liveCam); //must be called after fetching data		
+		}
+		super.onResume();
 	}
 }

@@ -11,14 +11,18 @@ import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +34,8 @@ import android.widget.TextView;
 public class MapActivity extends Activity implements LocationListener {
 	protected GoogleMap googlemap;
 	protected boolean useOfflineRoutes = true;
+	protected LocationManager lm;
+	protected LatLng myLoc;
 	Boolean isSatOn = false;
 	View v;
 	
@@ -40,7 +46,21 @@ public class MapActivity extends Activity implements LocationListener {
 		if(isGooglePlay()){
 			setContentView(R.layout.activity_map);		
 			setUpMap();	
+			
+            lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+            String provider = lm.getBestProvider(new Criteria(), true);
+            if (provider == null) {
+				Log.i("providor", "providor null");
+				
+			} 
+            Location location = lm.getLastKnownLocation(provider);
+            if (location != null) {
+				onLocationChanged(location);
+				Log.i("providor", "providor");
+			}
 		}
+		
+		
 	
 	}
 
@@ -75,6 +95,7 @@ public class MapActivity extends Activity implements LocationListener {
 	
 
 	private void setUpMap() {
+
 		
 		if(googlemap == null){
 			googlemap = ((MapFragment)getFragmentManager().findFragmentById(R.id.map)).getMap();
@@ -83,11 +104,13 @@ public class MapActivity extends Activity implements LocationListener {
 								
 				googlemap.setMyLocationEnabled(true);
 				
+
+				
 				//move camera to albuqueruque
 				googlemap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(35.08449090, -106.65113670)));
 				googlemap.animateCamera(CameraUpdateFactory.zoomTo(10));
 				
-				
+
 				googlemap.setOnMapLongClickListener(onLongClickMapSettins());
 				googlemap.setOnInfoWindowClickListener(infoClickListener());
 				
@@ -163,7 +186,7 @@ public class MapActivity extends Activity implements LocationListener {
 	@Override
 	public void onLocationChanged(Location location) {
 		// TODO Auto-generated method stub
-		//LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
+		myLoc = new LatLng(location.getLatitude(), location.getLongitude());
 		
 		//googlemap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
 		//googlemap.animateCamera(CameraUpdateFactory.zoomTo(10));
@@ -233,6 +256,8 @@ public class MapActivity extends Activity implements LocationListener {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		googlemap.clear();
+		lm.removeUpdates(this);
+		
 		super.onPause();
 	}
 

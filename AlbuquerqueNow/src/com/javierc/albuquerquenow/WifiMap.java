@@ -14,6 +14,7 @@ import com.javierc.albuquerquenow.util.WifiParseCSV.WifiSpot;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -22,12 +23,13 @@ public class WifiMap extends MapActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		// TODO Auto-generated method stub
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setDisplayShowTitleEnabled(false);
 		getActionBar().setIcon(R.drawable.arrow_left);
 		new AddLocationsTask(this).execute("http://documents.cabq.gov/GIS/itsd/wifi/wifiaccesspoints.csv");
-		super.onCreate(savedInstanceState);
+		
 	}
 	
 	@Override
@@ -55,6 +57,7 @@ public class WifiMap extends MapActivity{
 			List<WifiSpot> spots = new ArrayList<WifiSpot>();
 			List<MarkerOptions> markerOptsList = new ArrayList<MarkerOptions>();
 			try {
+				Log.i("URL", params[0]);
 				spots = new WifiParseCSV().parseFromUrl(new URL(params[0]));
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block

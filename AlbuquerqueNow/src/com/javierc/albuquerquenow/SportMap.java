@@ -9,6 +9,7 @@ public class SportMap extends MapActivity implements ActionBar.OnNavigationListe
 	ActionBar actionBar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		// TODO Auto-generated method stub
 		// Set up the action bar to show a dropdown list.
 		actionBar = getActionBar();
@@ -31,7 +32,7 @@ public class SportMap extends MapActivity implements ActionBar.OnNavigationListe
 
 		// Set up the dropdown list navigation in the action bar.
 		actionBar.setListNavigationCallbacks(adapter, this);
-		super.onCreate(savedInstanceState);
+		
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

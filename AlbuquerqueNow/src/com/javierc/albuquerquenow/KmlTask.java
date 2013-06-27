@@ -21,6 +21,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.javierc.albuquerquenow.util.KmlParse;
 
+//import com.javier.opendata.KMLParse;
+
 public class KmlTask extends AsyncTask<String, Void, List<Object>>{
     private Activity activity;
 
@@ -72,6 +74,7 @@ public class KmlTask extends AsyncTask<String, Void, List<Object>>{
 //			}			
 //    		json = new KmlParse().KMZFromURL(new URL(params[0]), Environment.getExternalStorageDirectory() + "/New Folder");
     		json = new KmlParse().KMLFromURL(new URL(params[0]));
+    		
 //			json = new KmlParse().KMZFromFile(new File(params[0]),Environment.getExternalStorageDirectory() + "/New Folder");
 
 		} catch (NumberFormatException e) {

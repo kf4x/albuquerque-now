@@ -21,6 +21,14 @@
 		android:paddingBottom="10sp"
         android:gravity="center" 
         android:id="@+id/load_ll">
+	<ImageView 
+	    android:id="@+id/camera"
+	    android:layout_gravity="center_horizontal"
+	    android:contentDescription="live photo of east mountians"
+		android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"  
+	    android:paddingTop="5dp" 
+	    android:layout_marginBottom ="20dp" />
 	    <TextView
 	        android:id="@+id/title"
 	        android:textSize="20sp"

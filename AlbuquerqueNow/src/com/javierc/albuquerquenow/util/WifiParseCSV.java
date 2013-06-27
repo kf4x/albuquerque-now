@@ -1,18 +1,22 @@
 package com.javierc.albuquerquenow.util;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.util.Log;
 
 
 
+
 public class WifiParseCSV {
-	
+	Pattern p = Pattern.compile("^((\"(?:[^\"]|\"\")*\"|[^,]*)(,(\"(?:[^\"]|\"\")*\"|[^,]*))*)$");
 	public class WifiSpot{
 		private String _name;
 		private String _address;
@@ -86,7 +90,6 @@ public class WifiParseCSV {
 	public List<WifiSpot> parseFromUrl(URL url) {
 		Scanner in = null;
 		List<WifiSpot> data = new ArrayList<WifiSpot>();
-		
 
 		try {
 			URLConnection connection = url.openConnection();
@@ -98,53 +101,99 @@ public class WifiParseCSV {
 		}
 		
 		if(in == null){
+			Log.i("NULL", "URL null");
 			return data;
 		}
+		
+		
 		in.nextLine();
 		while(in.hasNext()){
 			String  line;
 			String[] row;
 			double[] ll = new double[2];
 			line  = in.nextLine();
-			int commaLoc = 0; 
+			int commaLoc = 0, totalComma=0; 
 			String subline ="";
 			try {
 				commaLoc = line.lastIndexOf(',');
+//				totalComma = 
 				subline = line.substring(0, commaLoc);
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
 			
-			System.out.println(commaLoc);
-			row = subline.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-			System.out.println(row);
-			try {
-				double lng = Double.parseDouble(row[3]);
-				double lat = Double.parseDouble(row[4]);
-				//this order is same order as LatLng object;
-				ll[0] = lat;
-				ll[1] = lng;
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-				ll[0] = 0.0;
-				ll[1] = 0.0;
-			}
-			data.add(new WifiSpot()
-					.set_name(row[0])
-					.set_address(row[1])
-					.set_ssid(row[2])
-					.set_ll(ll)
-					.set_website("")
-					);
+//			System.out.println(commaLoc);
+//			List <String> list = parseLine(line);
+//			Matcher m = p.matcher(subline);
+//			row = subline.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+//			row = p.split(subline);
+////			row = subline.
+////			Log.i("SPOT", String.valueOf(row.length));
+//	        Matcher matcher = p.matcher(subline);
+//	        while (matcher.find()) {
+//	            System.out.println(matcher.group(3));
+//	        }
+//			System.out.println(list);
+//			for (int i = 0; i < list.size(); i++) {
+//				System.out.println(list.get(i));
+//				Log.i("SPOT", list.get(i));
+//			}
+//			try {
+//				double lng = Double.parseDouble(row[3]);
+//				double lat = Double.parseDouble(row[4]);
+//				//this order is same order as LatLng object;
+//				ll[0] = lat;
+//				ll[1] = lng;
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//				e.printStackTrace();
+//				ll[0] = 0.0;
+//				ll[1] = 0.0;
+//			}
+//			data.add(new WifiSpot()
+//					.set_name(row[0])
+//					.set_address(row[1])
+//					.set_ssid(row[2])
+//					.set_ll(ll)
+//					.set_website("")
+//					);
+			
 			
 		}
 		
 		//quick fix!!
 		//data.remove(0);
-		Log.i("Removing", "Removed first element");
+//		Log.i("Removing", "Removed first element");
 		
 		return data;
+		
+	}
+
+	private List<String> parseLine(String line) {
+		// TODO Auto-generated method stub
+		List <String> l = new ArrayList<String>();
+		boolean isInsideQ = false;
+		boolean ready = false;
+		String s = "";
+		for (int i = 0; i < line.length(); i++) {
+			Log.i("SPOT", line.charAt(i)+"");
+			if (line.charAt(i) == '"' && isInsideQ != true) {
+				isInsideQ = true;
+			} else if (line.charAt(i) == '"' && isInsideQ == true) {
+				isInsideQ = false;
+			}
+			if (line.charAt(i) == ',' && isInsideQ == false) {
+				ready = true;
+			}
+			
+			if(ready){
+				l.add(s);
+				s = "";
+			}else{
+				s.concat(line.charAt(i)+ "");
+			}
+		}
+		return l;
 		
 	}	
 }

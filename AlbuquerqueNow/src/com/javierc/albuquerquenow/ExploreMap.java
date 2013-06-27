@@ -12,6 +12,7 @@ public class ExploreMap extends MapActivity {
 	String kmz = null, url = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setDisplayShowTitleEnabled(false);
 		getActionBar().setIcon(R.drawable.arrow_left);
@@ -28,7 +29,7 @@ public class ExploreMap extends MapActivity {
 
 		 runTask();
 
-		super.onCreate(savedInstanceState);
+		
 
 	}
 

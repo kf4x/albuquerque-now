@@ -1,17 +1,33 @@
 package com.javierc.albuquerquenow;
 
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.Provider;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 
 public class TransitMap extends MapActivity implements ActionBar.OnNavigationListener, OnCompleteCB{
@@ -83,6 +99,8 @@ public class TransitMap extends MapActivity implements ActionBar.OnNavigationLis
 			//plot new markers
 			plotBus(actionBar.getSelectedNavigationIndex());
 			
+		} else if (item.getItemId() == R.id.bus_stops){
+			new PlotStopsTask(this).execute();
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -128,7 +146,6 @@ public class TransitMap extends MapActivity implements ActionBar.OnNavigationLis
 			refreshMarkers();
 		}
 		markers = l;
-		//Toast.makeText(getBaseContext(), String.valueOf(l.size()), Toast.LENGTH_SHORT).show();
 	}
 	
 	private void refreshMarkers(){
@@ -158,21 +175,114 @@ public class TransitMap extends MapActivity implements ActionBar.OnNavigationLis
     	return false;
 	}
     
-    private double distance(LatLng c, LatLng o){
-        final int R = 6371;
 
-        Double latDistance = Math.toRadians(o.latitude-c.latitude);
-        Double lonDistance = Math.toRadians(o.longitude-c.longitude);
-        Double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2) +
-                   Math.cos(Math.toRadians(c.latitude)) * Math.cos(Math.toRadians(o.latitude)) *
-                   Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-        Double cv = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        Double distance = R * cv;
-         
-        return distance;
-    }
     
-    private boolean isInsideArea(LatLng c, LatLng o, double r ){
-    	return distance(c, o) <= r;
+    class PlotStopsTask extends AsyncTask<Void, Void, List<MarkerOptions>>{
+
+    	JSONObject json = null;
+    	JSONArray marks;
+    	private Activity activity;
+    	public PlotStopsTask(Activity a) {
+    		activity = a;
+		}
+    	
+		@Override
+		protected List<MarkerOptions> doInBackground(Void... params) {
+			List<MarkerOptions> markerOptions = new ArrayList<MarkerOptions>();
+			// TODO Auto-generated method stub
+			try {
+				InputStream file = activity.getAssets().open("busstops/bstopSM.json");
+		        byte[] data = new byte[file.available()];
+		        file.read(data);
+		        file.close();
+		        json = new JSONObject(new String(data));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			try {
+				marks = json.getJSONArray("placemarks");
+	            for (int i = 0; i < marks.length(); i++) {
+	                JSONObject v = marks.getJSONObject(i);
+	                String name ="";
+	                try {
+	                	name = v.getString("name");
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+	                
+	                String desc = v.getString("description");
+
+	                JSONArray loc = v.getJSONArray("geometry");
+	                JSONObject coordinates = loc.getJSONObject(0);
+	                
+                    JSONArray coord =  coordinates.getJSONArray("coordinates");
+                    MarkerOptions markOptions = new MarkerOptions();
+                    double lt = 0.0;
+					double lg = 0.0;
+                    for (int j = 0; j < coord.length(); j++) {
+						JSONObject ll = coord.getJSONObject(j);
+ 
+						lt = ll.getDouble("lat");
+						lg = ll.getDouble("lng");
+						
+//						Log.d("lat stuff", lt + " " + lg);
+						markOptions.position(new LatLng(lt, lg));
+					}
+                    
+
+                    if (isInsideArea(myLoc, new LatLng(lt, lg), .35)) {
+                        markOptions.snippet(desc);
+                        markOptions.title(name);
+                        markerOptions.add(markOptions);
+					}
+                    
+                    
+
+	            }
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			return markerOptions;
+		}
+		
+	    private double distance(LatLng c, LatLng o){
+	        final int R = 6371;
+
+	        Double latDistance = Math.toRadians(o.latitude-c.latitude);
+	        Double lonDistance = Math.toRadians(o.longitude-c.longitude);
+	        Double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2) +
+	                   Math.cos(Math.toRadians(c.latitude)) * Math.cos(Math.toRadians(o.latitude)) *
+	                   Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+	        Double cv = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	        Double distance = R * cv;
+	         
+	        return distance;
+	    }
+	    
+	    private boolean isInsideArea(LatLng c, LatLng o, double r ){
+	    	return distance(c, o) <= r;
+	    }
+	    
+	    @Override
+	    protected void onPostExecute(List<MarkerOptions> result) {	    	
+	    	if(result.size() > 0){
+				for (int i = 0; i < result.size(); i++) {
+					
+					googlemap.addMarker(result.get(i));
+				}
+
+	    	}
+	    	super.onPostExecute(result);
+	    }
+    	
     }
 }

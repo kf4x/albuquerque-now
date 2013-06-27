@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.javierc.albuquerquenow"
-    android:versionCode="3"
-    android:versionName="1.0.11" >
+    android:versionCode="9"
+    android:versionName="1.1.00" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -36,7 +36,7 @@
         android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyC6IKjaTA3GGDoeJSFEgj_9_YXCwgwPXco" />
+            android:value="AIzaSyDL-q-7iGvlXpUL4iiJssfIxQsGkSfKuK8" />
         <!--
         debug AIzaSyC6IKjaTA3GGDoeJSFEgj_9_YXCwgwPXco
         final AIzaSyDL-q-7iGvlXpUL4iiJssfIxQsGkSfKuK8
